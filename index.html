@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NASHO Health Center | Birth Certificate</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<style>
+:root{--blue:#003b70;--blue2:#005b96;--green:#16833b;--bg:#eef3f7;--red:#b42318}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Arial,sans-serif;color:#111}
+.top{background:#002d55;color:#fff;padding:12px 22px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.top button,.btn{border:0;border-radius:7px;padding:11px 17px;font-weight:700;cursor:pointer;color:#fff;background:var(--blue)}
+.top button{background:#c62828}.toolbar{display:none;padding:15px;gap:10px;flex-wrap:wrap;justify-content:center}
+.btn.green{background:var(--green)}.btn.orange{background:#b96b00}.btn.gray{background:#666}
+.wrap{display:none;justify-content:center;padding:18px;overflow:auto}.cert{width:210mm;min-height:297mm;background:#fff;border:8px double var(--blue);padding:14mm 16mm;box-shadow:0 4px 20px #0002;font-family:"Times New Roman",serif}
+.head{text-align:center;border-bottom:3px solid var(--blue);padding-bottom:10px}.arms{width:82px;height:82px;object-fit:contain}.head h3{margin:2px;font-size:16px}.head h1{margin:9px 0 3px;color:var(--blue);font-size:27px;text-decoration:underline}.contact{font-size:13px}.title{font-weight:bold;color:var(--blue);font-size:16px;border-bottom:1.5px solid #777;padding-bottom:4px;margin:18px 0 10px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:13px 20px}.full{grid-column:1/-1}.field{display:flex;align-items:center;min-height:29px}.label{font-weight:700;white-space:nowrap;margin-right:7px;font-size:14px}input,select{flex:1;min-width:0;border:0;border-bottom:1.5px dotted #333;background:transparent;padding:3px 4px;font:14px "Times New Roman",serif;outline:0}input:focus,select:focus{background:#eef7ff;border-bottom:2px solid var(--blue)}
+.big input{font-weight:bold;text-transform:uppercase;font-size:15px}.sig{display:flex;justify-content:flex-end;margin-top:30px}.sigbox{text-align:center;width:280px;font-size:15px}.space{height:48px}.status{padding:10px;text-align:center;margin-top:12px;font-weight:bold}.pending{background:#fff4d6;color:#805b00}.verified{background:#e5f6ea;color:#146c2e}
+.modal{position:fixed;inset:0;background:#fff;display:flex;align-items:center;justify-content:center;z-index:99}.login{width:min(420px,92%);background:#ffffffee;padding:30px;border-radius:14px;box-shadow:0 10px 35px #0003;text-align:center}.login h2{color:var(--blue)}.login input{width:100%;border:1px solid #ccc;border-radius:7px;padding:13px;margin:7px 0;font:14px Arial}.login button{width:100%;margin-top:10px}.hidden{display:none!important}
+.history{display:none;background:#fff;margin:0 auto 20px;width:min(1100px,96%);padding:20px;border-radius:10px}.history table{width:100%;border-collapse:collapse}.history th,.history td{padding:9px;border-bottom:1px solid #ddd;text-align:left;font-size:13px}.pill{padding:4px 8px;border-radius:12px;font-weight:bold}.p{background:#fff0c2}.v{background:#dff3e5;color:#12652a}
+@media(max-width:800px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.cert{width:100%;min-height:auto;padding:18px;border-width:5px}.field{align-items:flex-start;flex-direction:column}.label{margin-bottom:3px;white-space:normal}.head h1{font-size:22px}}
+@media print{@page{size:A4 portrait;margin:4mm}body{background:#fff}.top,.toolbar,.history,.modal{display:none!important}.wrap{display:block!important;padding:0}.cert{box-shadow:none;width:198mm;min-height:289mm;margin:auto;border:5px double var(--blue);padding:10mm 12mm}}
+</style>
+</head>
+<body>
+<div id="loginModal" class="modal">
+<div class="login">
+<h2>NASHO HEALTH CENTER</h2><p>Nurse Login</p>
+<input id="username" placeholder="Username" autocomplete="username">
+<input id="password" type="password" placeholder="Password" autocomplete="current-password">
+<button class="btn" onclick="login()">LOGIN</button>
+<p id="loginMsg" style="color:#b42318"></p>
+</div></div>
+
+<div class="top" id="top" style="display:none">
+<div>Logged in: <b id="who"></b></div><button onclick="logout()">Logout</button>
+</div>
+<div class="toolbar" id="toolbar">
+<button class="btn" onclick="newCertificate()">New Certificate</button>
+<button class="btn green" onclick="submitRecord()">Submit & Save</button>
+<button class="btn orange" onclick="window.print()">Print / PDF</button>
+<button class="btn gray" onclick="loadMine()">My Certificates</button>
+</div>
+
+<div class="wrap" id="wrap">
+<div class="cert" id="certificate">
+<div class="head">
+<img class="arms" src="https://upload.wikimedia.org/wikipedia/commons/1/17/Coat_of_arms_of_Rwanda.svg">
+<h3>REPUBLIC OF RWANDA</h3><h3>EASTERN PROVINCE</h3><h3>KIREHE DISTRICT</h3><h3>NASHO HEALTH CENTER</h3>
+<div class="contact"><b>Email: nashohc0428@gmail.com</b></div>
+<h1>MEDICAL BIRTH CERTIFICATE</h1>
+</div>
+
+<div class="title">MOTHER INFORMATION</div>
+<div class="grid">
+<div class="field full big"><span class="label">Mother's Full Name:</span><input id="motherName" required></div>
+<div class="field"><span class="label">Mother's ID:</span><input id="motherId" required></div>
+<div class="field"><span class="label">Mother's Phone:</span><input id="motherPhone" required></div>
+</div>
+
+<div class="title">CHILD INFORMATION</div>
+<div class="grid">
+<div class="field full big"><span class="label">Child's Full Name:</span><input id="childName" required></div>
+<div class="field"><span class="label">Sex:</span><select id="childSex" required><option value="">Select</option><option>Male</option><option>Female</option></select></div>
+<div class="field"><span class="label">Date of Birth:</span><input id="dob" type="date" required></div>
+<div class="field"><span class="label">Time of Birth:</span><input id="tob" type="time" required></div>
+<div class="field"><span class="label">Weight (grams):</span><input id="weight" type="number" required></div>
+<div class="field"><span class="label">Height (cm):</span><input id="height" type="number" required></div>
+<div class="field"><span class="label">Nurse:</span><input id="nurseName" readonly></div>
+<div class="field full"><span class="label">Place of Birth:</span><input value="NASHO HEALTH CENTER" readonly style="font-weight:bold"></div>
+</div>
+
+<div class="title">FATHER INFORMATION</div>
+<div class="grid">
+<div class="field full big"><span class="label">Father's Full Name:</span><input id="fatherName" required></div>
+<div class="field"><span class="label">Father's ID:</span><input id="fatherId" required></div>
+<div class="field"><span class="label">Father's Phone:</span><input id="fatherPhone" required></div>
+</div>
+
+<div class="title">BIRTH AREA INFORMATION</div>
+<div class="grid">
+<div class="field"><span class="label">District:</span><input value="KIREHE" readonly></div>
+<div class="field"><span class="label">Sector:</span><select id="sector" required><option value="">Select</option><option>Gahara</option><option>Gatore</option><option>Kigarama</option><option>Kigina</option><option>Kirehe</option><option>Mahama</option><option>Mpanga</option><option>Musaza</option><option>Mushikiri</option><option>Nasho</option><option>Nyamugari</option><option>Nyarubuye</option></select></div>
+<div class="field"><span class="label">Cell:</span><input id="cell" required></div>
+<div class="field"><span class="label">Village:</span><input id="village" required></div>
+</div>
+
+<div class="title">ADMINISTRATIVE REFERENCE</div>
+<div class="grid">
+<div class="field"><span class="label">Application Number:</span><input id="appNo" readonly placeholder="Pending admin verification"></div>
+<div class="field"><span class="label">NIN:</span><input id="nin" readonly placeholder="Pending admin verification"></div>
+<div class="field full"><span class="label">Auto-Gen Code:</span><input id="autoGen" readonly placeholder="Pending admin verification"></div>
+</div>
+<div id="status" class="status pending">PENDING — APPLICATION NUMBER NOT YET PROVIDED</div>
+
+<div class="sig"><div class="sigbox"><b>TUYISHIME Japhet</b><br><span style="color:green;font-weight:bold">Head of NASHO Health Center</span><div class="space"></div></div></div>
+</div></div>
+
+<div class="history" id="history">
+<h2>My Birth Certificates</h2><div id="historyBody">Loading...</div>
+</div>
+
+<script>
+const API_URL="PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
+let session=null,currentId=null;
+
+function api(action,data={}){
+  return fetch(API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action,...data})})
+  .then(r=>r.json());
+}
+async function login(){
+ const u=username.value.trim(),p=password.value;
+ if(!u||!p){loginMsg.textContent="Enter username and password.";return}
+ try{
+  const r=await api("nurseLogin",{username:u,password:p});
+  if(r.success){session=r.user;who.textContent=session.name;nurseName.value=session.name;loginModal.classList.add("hidden");top.style.display="flex";toolbar.style.display="flex";wrap.style.display="flex";newCertificate();}
+  else loginMsg.textContent=r.message||"Invalid login.";
+ }catch(e){loginMsg.textContent="Server connection error. Check API URL."}
+}
+function logout(){session=null;loginModal.classList.remove("hidden");top.style.display="none";toolbar.style.display="none";wrap.style.display="none";history.classList.remove("show");username.value=password.value="";}
+function fields(){
+ return {motherName:motherName.value,motherId:motherId.value,motherPhone:motherPhone.value,childName:childName.value,childSex:childSex.value,dob:dob.value,tob:tob.value,weight:weight.value,height:height.value,nurseName:nurseName.value,fatherName:fatherName.value,fatherId:fatherId.value,fatherPhone:fatherPhone.value,sector:sector.value,cell:cell.value,village:village.value};
+}
+function validate(){
+ for(const [k,v] of Object.entries(fields()))if(!String(v||"").trim()){alert("Please fill all required fields.");document.getElementById(k)?.focus();return false}
+ return true;
+}
+function clearForm(){
+ ["motherName","motherId","motherPhone","childName","childSex","dob","tob","weight","height","fatherName","fatherId","fatherPhone","sector","cell","village","appNo","nin","autoGen"].forEach(id=>{let e=document.getElementById(id);if(e)e.value=""});
+ nurseName.value=session?.name||"";appNo.placeholder="Pending admin verification";nin.placeholder="Pending admin verification";autoGen.placeholder="Pending admin verification";status.className="status pending";status.textContent="PENDING — APPLICATION NUMBER NOT YET PROVIDED";currentId=null;
+}
+function newCertificate(){clearForm();history.style.display="none";wrap.style.display="flex";}
+async function submitRecord(){
+ if(!validate())return;
+ if(!confirm("Submit this birth record?"))return;
+ try{
+  const r=await api("submitBirth",{token:session.token,data:fields()});
+  if(r.success){currentId=r.id;alert("Saved successfully. The certificate will become available after admin verification.");loadMine();}
+  else alert(r.message||"Could not save record.");
+ }catch(e){alert("Server error while saving.")}
+}
+async function loadMine(){
+ try{
+  const r=await api("myCertificates",{token:session.token});
+  history.style.display="block";wrap.style.display="none";
+  if(!r.success){historyBody.innerHTML="<p>Could not load records.</p>";return}
+  if(!r.records.length){historyBody.innerHTML="<p>No birth certificates found.</p>";return}
+  historyBody.innerHTML=`<table><tr><th>Child</th><th>Date</th><th>Status</th><th>Action</th></tr>`+
+  r.records.map(x=>`<tr><td>${esc(x.childName)}</td><td>${esc(x.dob)}</td><td><span class="pill ${x.status==="VERIFIED"?"v":"p"}">${x.status}</span></td><td><button class="btn" onclick='viewRecord(${JSON.stringify(x)})'>View</button></td></tr>`).join("")+"</table>";
+ }catch(e){alert("Server error.")}
+}
+function viewRecord(x){
+ currentId=x.id;for(const k of Object.keys(fields()))if(document.getElementById(k))document.getElementById(k).value=x[k]||"";
+ appNo.value=x.applicationNumber||"";nin.value=x.nin||"";autoGen.value=x.autoGen||"";nurseName.value=x.nurseName||session.name;
+ status.className="status "+(x.status==="VERIFIED"?"verified":"pending");status.textContent=x.status==="VERIFIED"?"VERIFIED — CERTIFICATE AVAILABLE":"PENDING — APPLICATION NUMBER NOT YET PROVIDED";
+ history.style.display="none";wrap.style.display="flex";
+}
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
+</script>
+</body></html>
