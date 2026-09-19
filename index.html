@@ -19,15 +19,36 @@
   --border:#d7e0e8;
   --shadow:0 10px 35px rgba(0,0,0,.10);
 }
-*{box-sizing:border-box}
-html,body{margin:0;padding:0}
+
+*{
+  box-sizing:border-box;
+}
+
+html,
+body{
+  margin:0;
+  padding:0;
+}
+
 body{
   background:linear-gradient(135deg,#eef5f9,#f8fbfd);
   color:var(--text);
   font-family:Arial,sans-serif;
 }
-button,input,select{font:inherit}
-button{cursor:pointer}
+
+button,
+input,
+select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =========================================================
+   TOP BAR
+========================================================= */
 
 .top{
   display:none;
@@ -42,8 +63,15 @@ button{cursor:pointer}
   gap:12px;
   box-shadow:0 2px 12px #0002;
 }
-.top-title{font-weight:800}
-.top-user{font-size:14px}
+
+.top-title{
+  font-weight:800;
+}
+
+.top-user{
+  font-size:14px;
+}
+
 .logout{
   border:0;
   border-radius:8px;
@@ -52,6 +80,10 @@ button{cursor:pointer}
   color:#fff;
   font-weight:700;
 }
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
 
 .toolbar{
   display:none;
@@ -62,6 +94,7 @@ button{cursor:pointer}
   flex-wrap:wrap;
   justify-content:center;
 }
+
 .btn{
   border:0;
   border-radius:9px;
@@ -71,11 +104,30 @@ button{cursor:pointer}
   font-weight:800;
   box-shadow:0 2px 7px #0001;
 }
-.btn:hover{filter:brightness(1.08)}
-.btn.green{background:var(--green)}
-.btn.orange{background:var(--orange)}
-.btn.gray{background:#606b75}
-.btn.red{background:var(--red)}
+
+.btn:hover{
+  filter:brightness(1.08);
+}
+
+.btn.green{
+  background:var(--green);
+}
+
+.btn.orange{
+  background:var(--orange);
+}
+
+.btn.gray{
+  background:#606b75;
+}
+
+.btn.red{
+  background:var(--red);
+}
+
+/* =========================================================
+   CERTIFICATE AREA
+========================================================= */
 
 .wrap{
   display:none;
@@ -83,6 +135,7 @@ button{cursor:pointer}
   padding:15px;
   overflow:auto;
 }
+
 .cert{
   width:210mm;
   min-height:297mm;
@@ -92,17 +145,24 @@ button{cursor:pointer}
   box-shadow:var(--shadow);
   font-family:"Times New Roman",serif;
 }
+
 .head{
   text-align:center;
   border-bottom:3px solid var(--blue);
   padding-bottom:9px;
 }
+
 .arms{
   width:88px;
   height:88px;
   object-fit:contain;
 }
-.head h3{margin:2px;font-size:16px}
+
+.head h3{
+  margin:2px;
+  font-size:16px;
+}
+
 .head h1{
   margin:9px 0 3px;
   color:var(--blue);
@@ -110,7 +170,11 @@ button{cursor:pointer}
   text-decoration:underline;
   letter-spacing:.3px;
 }
-.contact{font-size:13px}
+
+.contact{
+  font-size:13px;
+}
+
 .title{
   font-weight:800;
   color:var(--blue);
@@ -119,24 +183,32 @@ button{cursor:pointer}
   padding-bottom:4px;
   margin:17px 0 10px;
 }
+
 .grid{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:12px 20px;
 }
-.full{grid-column:1/-1}
+
+.full{
+  grid-column:1/-1;
+}
+
 .field{
   display:flex;
   align-items:center;
   min-height:31px;
 }
+
 .label{
   font-weight:700;
   white-space:nowrap;
   margin-right:7px;
   font-size:14px;
 }
-.field input,.field select{
+
+.field input,
+.field select{
   flex:1;
   min-width:0;
   border:0;
@@ -147,40 +219,55 @@ button{cursor:pointer}
   color:#111;
   font:14px "Times New Roman",serif;
 }
-.field input:focus,.field select:focus{
+
+.field input:focus,
+.field select:focus{
   background:#eef7ff;
   border-bottom:2px solid var(--blue);
 }
+
 .big input{
   font-weight:700;
   text-transform:uppercase;
   font-size:15px;
 }
+
 .readonly{
   background:#f4f7fa!important;
 }
+
+/* =========================================================
+   STATUS
+========================================================= */
+
 .status{
-  padding:11px;
-  text-align:center;
-  margin-top:13px;
-  border-radius:5px;
-  font-weight:800;
+  display:none!important;
 }
-.pending{background:#fff4d6;color:#805b00}
-.verified{background:#e5f6ea;color:#146c2e}
+
+/* =========================================================
+   SIGNATURE
+========================================================= */
+
 .sig{
   display:flex;
   justify-content:flex-end;
   margin-top:30px;
 }
+
 .sigbox{
   text-align:center;
   width:280px;
   font-size:15px;
 }
-.space{height:48px}
 
-/* Login */
+.space{
+  height:48px;
+}
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
 .modal{
   position:fixed;
   inset:0;
@@ -189,9 +276,15 @@ button{cursor:pointer}
   align-items:center;
   justify-content:center;
   background:
-    radial-gradient(circle at top,#e6f2fb 0,#f5f9fc 42%,#edf3f7 100%);
+    radial-gradient(
+      circle at top,
+      #e6f2fb 0,
+      #f5f9fc 42%,
+      #edf3f7 100%
+    );
   padding:20px;
 }
+
 .login{
   width:min(430px,100%);
   background:#fff;
@@ -201,26 +294,31 @@ button{cursor:pointer}
   text-align:center;
   border:1px solid #e2eaf0;
 }
+
 .login-logo{
   width:90px;
   height:90px;
   object-fit:contain;
   margin-bottom:5px;
 }
+
 .login h1{
   margin:5px 0;
   color:var(--blue);
   font-size:23px;
 }
+
 .login h2{
   margin:3px 0 5px;
   color:#333;
   font-size:17px;
 }
+
 .login p{
   color:#65717d;
   margin:7px 0 16px;
 }
+
 .login input{
   width:100%;
   border:1px solid #cbd5df;
@@ -229,14 +327,25 @@ button{cursor:pointer}
   margin:6px 0;
   outline:0;
 }
-.login input:focus{border-color:var(--blue2);box-shadow:0 0 0 3px #005b9618}
-.login .btn{width:100%;margin-top:9px;padding:13px}
+
+.login input:focus{
+  border-color:var(--blue2);
+  box-shadow:0 0 0 3px #005b9618;
+}
+
+.login .btn{
+  width:100%;
+  margin-top:9px;
+  padding:13px;
+}
+
 .login-msg{
   min-height:21px;
   color:var(--red);
   font-size:14px;
   font-weight:700;
 }
+
 .api-ok{
   margin-top:15px;
   padding:8px;
@@ -246,7 +355,10 @@ button{cursor:pointer}
   font-size:12px;
 }
 
-/* History */
+/* =========================================================
+   HISTORY
+========================================================= */
+
 .history{
   display:none;
   max-width:1150px;
@@ -256,20 +368,35 @@ button{cursor:pointer}
   border-radius:13px;
   box-shadow:var(--shadow);
 }
-.history h2{margin-top:0;color:var(--blue)}
-.table-wrap{overflow:auto}
+
+.history h2{
+  margin-top:0;
+  color:var(--blue);
+}
+
+.table-wrap{
+  overflow:auto;
+}
+
 .history table{
   width:100%;
   border-collapse:collapse;
   min-width:650px;
 }
-.history th,.history td{
+
+.history th,
+.history td{
   padding:10px;
   border-bottom:1px solid #e2e7eb;
   text-align:left;
   font-size:13px;
 }
-.history th{background:#f2f6f9;color:#334}
+
+.history th{
+  background:#f2f6f9;
+  color:#334;
+}
+
 .pill{
   display:inline-block;
   padding:4px 9px;
@@ -277,15 +404,27 @@ button{cursor:pointer}
   font-weight:800;
   font-size:11px;
 }
-.pill.p{background:#fff0c2;color:#805b00}
-.pill.v{background:#dff3e5;color:#12652a}
+
+.pill.p{
+  background:#fff0c2;
+  color:#805b00;
+}
+
+.pill.v{
+  background:#dff3e5;
+  color:#12652a;
+}
+
 .empty{
   padding:25px;
   text-align:center;
   color:#66727d;
 }
 
-/* Pending screen */
+/* =========================================================
+   PENDING SCREEN
+========================================================= */
+
 .pending-screen{
   display:none;
   max-width:800px;
@@ -296,10 +435,19 @@ button{cursor:pointer}
   box-shadow:var(--shadow);
   text-align:center;
 }
-.pending-screen h2{color:var(--orange)}
-.pending-screen .big-icon{font-size:46px}
 
-/* Toast */
+.pending-screen h2{
+  color:var(--orange);
+}
+
+.pending-screen .big-icon{
+  font-size:46px;
+}
+
+/* =========================================================
+   TOAST
+========================================================= */
+
 .toast{
   position:fixed;
   right:18px;
@@ -314,48 +462,238 @@ button{cursor:pointer}
   display:none;
   font-size:14px;
 }
-.toast.show{display:block}
 
-.hidden{display:none!important}
+.toast.show{
+  display:block;
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media(max-width:800px){
-  .top{padding:11px 13px}
-  .top-title{font-size:13px}
-  .top-user{font-size:12px}
-  .toolbar{padding:10px}
-  .toolbar .btn{flex:1 1 44%;font-size:12px;padding:10px 8px}
-  .wrap{padding:8px}
+
+  .top{
+    padding:11px 13px;
+  }
+
+  .top-title{
+    font-size:13px;
+  }
+
+  .top-user{
+    font-size:12px;
+  }
+
+  .toolbar{
+    padding:10px;
+  }
+
+  .toolbar .btn{
+    flex:1 1 44%;
+    font-size:12px;
+    padding:10px 8px;
+  }
+
+  .wrap{
+    padding:8px;
+  }
+
   .cert{
     width:100%;
     min-height:auto;
     padding:17px;
     border-width:5px;
   }
-  .grid{grid-template-columns:1fr}
-  .full{grid-column:auto}
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .full{
+    grid-column:auto;
+  }
+
   .field{
     align-items:flex-start;
     flex-direction:column;
     min-height:55px;
   }
-  .label{margin-bottom:4px;white-space:normal}
-  .field input,.field select{width:100%}
-  .head h1{font-size:22px}
-  .history{margin:8px;padding:15px}
+
+  .label{
+    margin-bottom:4px;
+    white-space:normal;
+  }
+
+  .field input,
+  .field select{
+    width:100%;
+  }
+
+  .head h1{
+    font-size:22px;
+  }
+
+  .history{
+    margin:8px;
+    padding:15px;
+  }
 }
 
+/* =========================================================
+   PRINT / PDF
+   ONE A4 PAGE
+========================================================= */
+
 @media print{
-  @page{size:A4 portrait;margin:4mm}
-  body{background:#fff}
-  .top,.toolbar,.history,.modal,.pending-screen,.toast{display:none!important}
-  .wrap{display:block!important;padding:0}
+
+  @page{
+    size:A4 portrait;
+    margin:0;
+  }
+
+  html,
+  body{
+    width:210mm!important;
+    height:297mm!important;
+    margin:0!important;
+    padding:0!important;
+    background:#fff!important;
+    overflow:hidden!important;
+  }
+
+  body{
+    -webkit-print-color-adjust:exact!important;
+    print-color-adjust:exact!important;
+  }
+
+  .top,
+  .toolbar,
+  .history,
+  .modal,
+  .pending-screen,
+  .toast{
+    display:none!important;
+  }
+
+  .wrap{
+    display:block!important;
+    width:210mm!important;
+    height:297mm!important;
+    padding:0!important;
+    margin:0!important;
+    overflow:hidden!important;
+  }
+
   .cert{
-    width:198mm;
-    min-height:289mm;
-    margin:auto;
-    box-shadow:none;
-    border:5px double var(--blue);
-    padding:10mm 12mm;
+    display:block!important;
+
+    width:210mm!important;
+    height:297mm!important;
+    min-height:297mm!important;
+    max-height:297mm!important;
+
+    margin:0!important;
+    padding:9mm 12mm!important;
+
+    background:#fff!important;
+    box-shadow:none!important;
+
+    border:5px double var(--blue)!important;
+
+    page-break-before:avoid!important;
+    page-break-after:avoid!important;
+    page-break-inside:avoid!important;
+
+    break-before:avoid!important;
+    break-after:avoid!important;
+    break-inside:avoid!important;
+
+    overflow:hidden!important;
+  }
+
+  .status{
+    display:none!important;
+  }
+
+  .head{
+    padding-bottom:6px!important;
+  }
+
+  .arms{
+    width:70px!important;
+    height:70px!important;
+  }
+
+  .head h3{
+    margin:1px!important;
+    font-size:13px!important;
+  }
+
+  .head h1{
+    margin:5px 0 2px!important;
+    font-size:23px!important;
+  }
+
+  .contact{
+    font-size:11px!important;
+  }
+
+  .title{
+    margin:10px 0 6px!important;
+    font-size:13px!important;
+    padding-bottom:3px!important;
+  }
+
+  .grid{
+    gap:6px 14px!important;
+  }
+
+  .field{
+    min-height:24px!important;
+  }
+
+  .label{
+    font-size:12px!important;
+  }
+
+  .field input,
+  .field select{
+    font-size:12px!important;
+    padding:2px 3px!important;
+  }
+
+  .sig{
+    margin-top:18px!important;
+  }
+
+  .sigbox{
+    width:230px!important;
+    font-size:12px!important;
+  }
+
+  .space{
+    height:30px!important;
+  }
+
+  input,
+  select{
+    color:#111!important;
+    -webkit-print-color-adjust:exact!important;
+    print-color-adjust:exact!important;
+  }
+
+  /* Hide browser-only status completely */
+  #status{
+    display:none!important;
+    visibility:hidden!important;
+    height:0!important;
+    margin:0!important;
+    padding:0!important;
   }
 }
 </style>
@@ -363,142 +701,406 @@ button{cursor:pointer}
 
 <body>
 
-<!-- LOGIN -->
+<!-- =========================================================
+     LOGIN
+========================================================= -->
+
 <div id="loginModal" class="modal">
+
   <div class="login">
-    <img class="login-logo"
+
+    <img
+      class="login-logo"
       src="https://upload.wikimedia.org/wikipedia/commons/1/17/Coat_of_arms_of_Rwanda.svg"
       alt="Rwanda Coat of Arms"
-      onerror="this.style.display='none'">
+      onerror="this.style.display='none'"
+    >
 
     <h1>NASHO HEALTH CENTER</h1>
+
     <h2>Medical Birth Certificate System</h2>
+
     <p>Nurse Login</p>
 
-    <input id="username" type="text" placeholder="Username" autocomplete="username">
-    <input id="password" type="password" placeholder="Password / PIN" autocomplete="current-password">
+    <input
+      id="username"
+      type="text"
+      placeholder="Username"
+      autocomplete="username"
+    >
 
-    <button class="btn" id="loginBtn">LOGIN</button>
+    <input
+      id="password"
+      type="password"
+      placeholder="Password / PIN"
+      autocomplete="current-password"
+    >
+
+    <button class="btn" id="loginBtn">
+      LOGIN
+    </button>
 
     <div id="loginMsg" class="login-msg"></div>
 
     <div class="api-ok">
       Secure connection to NASHO Birth Certificate API
     </div>
+
   </div>
+
 </div>
 
-<!-- TOP BAR -->
+<!-- =========================================================
+     TOP BAR
+========================================================= -->
+
 <div class="top" id="top">
-  <div class="top-title">NASHO BIRTH CERTIFICATE SYSTEM</div>
-  <div class="top-user">Nurse: <b id="who"></b></div>
-  <button class="logout" id="logoutBtn">Logout</button>
+
+  <div class="top-title">
+    NASHO BIRTH CERTIFICATE SYSTEM
+  </div>
+
+  <div class="top-user">
+    Nurse: <b id="who"></b>
+  </div>
+
+  <button class="logout" id="logoutBtn">
+    Logout
+  </button>
+
 </div>
 
-<!-- TOOLBAR -->
+<!-- =========================================================
+     TOOLBAR
+========================================================= -->
+
 <div class="toolbar" id="toolbar">
-  <button class="btn" id="newBtn">New Certificate</button>
-  <button class="btn green" id="submitBtn">Submit & Save</button>
-  <button class="btn orange hidden" id="printBtn">Print / PDF</button>
-  <button class="btn gray" id="historyBtn">My Certificates</button>
+
+  <button class="btn" id="newBtn">
+    New Certificate
+  </button>
+
+  <button class="btn green" id="submitBtn">
+    Submit & Save
+  </button>
+
+  <button class="btn orange hidden" id="printBtn">
+    Print / PDF
+  </button>
+
+  <button class="btn gray" id="historyBtn">
+    My Certificates
+  </button>
+
 </div>
 
-<!-- CERTIFICATE -->
+<!-- =========================================================
+     CERTIFICATE
+========================================================= -->
+
 <div class="wrap" id="wrap">
+
   <div class="cert" id="certificate">
 
+    <!-- HEADER -->
+
     <div class="head">
-      <img class="arms" src="https://upload.wikimedia.org/wikipedia/commons/1/17/Coat_of_arms_of_Rwanda.svg" alt="Rwanda Coat of Arms">
+
+      <img
+        class="arms"
+        src="https://upload.wikimedia.org/wikipedia/commons/1/17/Coat_of_arms_of_Rwanda.svg"
+        alt="Rwanda Coat of Arms"
+      >
+
       <h3>REPUBLIC OF RWANDA</h3>
       <h3>EASTERN PROVINCE</h3>
       <h3>KIREHE DISTRICT</h3>
       <h3>NASHO HEALTH CENTER</h3>
-      <div class="contact"><b>Email: nashohc0428@gmail.com</b></div>
-      <h1>MEDICAL BIRTH CERTIFICATE</h1>
+
+      <div class="contact">
+        <b>Email: nashohc0428@gmail.com</b>
+      </div>
+
+      <h1>
+        MEDICAL BIRTH CERTIFICATE
+      </h1>
+
     </div>
 
-    <div class="title">MOTHER INFORMATION</div>
-    <div class="grid">
-      <div class="field full big">
-        <span class="label">Mother's Full Name:</span>
-        <input id="motherName" required>
-      </div>
-      <div class="field">
-        <span class="label">Mother's ID:</span>
-        <input id="motherId" required>
-      </div>
-      <div class="field">
-        <span class="label">Mother's Phone:</span>
-        <input id="motherPhone" type="tel" required>
-      </div>
+    <!-- MOTHER -->
+
+    <div class="title">
+      MOTHER INFORMATION
     </div>
 
-    <div class="title">CHILD INFORMATION</div>
     <div class="grid">
+
       <div class="field full big">
-        <span class="label">Child's Full Name:</span>
-        <input id="childName" required>
+
+        <span class="label">
+          Mother's Full Name:
+        </span>
+
+        <input
+          id="motherName"
+          required
+        >
+
       </div>
+
       <div class="field">
-        <span class="label">Sex:</span>
-        <select id="childSex" required>
-          <option value="">Select</option>
-          <option>Male</option>
-          <option>Female</option>
+
+        <span class="label">
+          Mother's ID:
+        </span>
+
+        <input
+          id="motherId"
+          required
+        >
+
+      </div>
+
+      <div class="field">
+
+        <span class="label">
+          Mother's Phone:
+        </span>
+
+        <input
+          id="motherPhone"
+          type="tel"
+          required
+        >
+
+      </div>
+
+    </div>
+
+    <!-- CHILD -->
+
+    <div class="title">
+      CHILD INFORMATION
+    </div>
+
+    <div class="grid">
+
+      <div class="field full big">
+
+        <span class="label">
+          Child's Full Name:
+        </span>
+
+        <input
+          id="childName"
+          required
+        >
+
+      </div>
+
+      <div class="field">
+
+        <span class="label">
+          Sex:
+        </span>
+
+        <select
+          id="childSex"
+          required
+        >
+          <option value="">
+            Select
+          </option>
+
+          <option>
+            Male
+          </option>
+
+          <option>
+            Female
+          </option>
+
         </select>
+
       </div>
+
       <div class="field">
-        <span class="label">Date of Birth:</span>
-        <input id="dob" type="date" required>
+
+        <span class="label">
+          Date of Birth:
+        </span>
+
+        <input
+          id="dob"
+          type="date"
+          required
+        >
+
       </div>
+
       <div class="field">
-        <span class="label">Time of Birth:</span>
-        <input id="tob" type="time" required>
+
+        <span class="label">
+          Time of Birth:
+        </span>
+
+        <input
+          id="tob"
+          type="time"
+          required
+        >
+
       </div>
+
       <div class="field">
-        <span class="label">Weight (grams):</span>
-        <input id="weight" type="number" min="0" required>
+
+        <span class="label">
+          Weight (grams):
+        </span>
+
+        <input
+          id="weight"
+          type="number"
+          min="0"
+          required
+        >
+
       </div>
+
       <div class="field">
-        <span class="label">Height (cm):</span>
-        <input id="height" type="number" min="0" step="0.1" required>
+
+        <span class="label">
+          Height (cm):
+        </span>
+
+        <input
+          id="height"
+          type="number"
+          min="0"
+          step="0.1"
+          required
+        >
+
       </div>
+
       <div class="field">
-        <span class="label">Nurse:</span>
-        <input id="nurseName" class="readonly" readonly>
+
+        <span class="label">
+          Nurse:
+        </span>
+
+        <input
+          id="nurseName"
+          class="readonly"
+          readonly
+        >
+
       </div>
+
       <div class="field full">
-        <span class="label">Place of Birth:</span>
-        <input value="NASHO HEALTH CENTER" class="readonly" readonly style="font-weight:bold">
+
+        <span class="label">
+          Place of Birth:
+        </span>
+
+        <input
+          value="NASHO HEALTH CENTER"
+          class="readonly"
+          readonly
+          style="font-weight:bold"
+        >
+
       </div>
+
     </div>
 
-    <div class="title">FATHER INFORMATION</div>
+    <!-- FATHER -->
+
+    <div class="title">
+      FATHER INFORMATION
+    </div>
+
     <div class="grid">
+
       <div class="field full big">
-        <span class="label">Father's Full Name:</span>
-        <input id="fatherName" required>
+
+        <span class="label">
+          Father's Full Name:
+        </span>
+
+        <input
+          id="fatherName"
+          required
+        >
+
       </div>
+
       <div class="field">
-        <span class="label">Father's ID:</span>
-        <input id="fatherId" required>
+
+        <span class="label">
+          Father's ID:
+        </span>
+
+        <input
+          id="fatherId"
+          required
+        >
+
       </div>
+
       <div class="field">
-        <span class="label">Father's Phone:</span>
-        <input id="fatherPhone" type="tel" required>
+
+        <span class="label">
+          Father's Phone:
+        </span>
+
+        <input
+          id="fatherPhone"
+          type="tel"
+          required
+        >
+
       </div>
+
     </div>
 
-    <div class="title">BIRTH AREA INFORMATION</div>
+    <!-- BIRTH AREA -->
+
+    <div class="title">
+      BIRTH AREA INFORMATION
+    </div>
+
     <div class="grid">
+
       <div class="field">
-        <span class="label">District:</span>
-        <input value="KIREHE" class="readonly" readonly>
+
+        <span class="label">
+          District:
+        </span>
+
+        <input
+          value="KIREHE"
+          class="readonly"
+          readonly
+        >
+
       </div>
+
       <div class="field">
-        <span class="label">Sector:</span>
-        <select id="sector" required>
-          <option value="">Select</option>
+
+        <span class="label">
+          Sector:
+        </span>
+
+        <select
+          id="sector"
+          required
+        >
+
+          <option value="">
+            Select
+          </option>
+
           <option>Gahara</option>
           <option>Gatore</option>
           <option>Kigarama</option>
@@ -511,171 +1113,366 @@ button{cursor:pointer}
           <option>Nasho</option>
           <option>Nyamugari</option>
           <option>Nyarubuye</option>
+
         </select>
+
       </div>
+
       <div class="field">
-        <span class="label">Cell:</span>
-        <input id="cell" required>
+
+        <span class="label">
+          Cell:
+        </span>
+
+        <input
+          id="cell"
+          required
+        >
+
       </div>
+
       <div class="field">
-        <span class="label">Village:</span>
-        <input id="village" required>
+
+        <span class="label">
+          Village:
+        </span>
+
+        <input
+          id="village"
+          required
+        >
+
       </div>
+
     </div>
 
-    <div class="title">ADMINISTRATIVE REFERENCE</div>
+    <!-- ADMINISTRATIVE -->
+
+    <div class="title">
+      ADMINISTRATIVE REFERENCE
+    </div>
+
     <div class="grid">
+
       <div class="field">
-        <span class="label">Application Number:</span>
-        <input id="appNo" class="readonly" readonly placeholder="Pending admin verification">
+
+        <span class="label">
+          Application Number:
+        </span>
+
+        <input
+          id="appNo"
+          class="readonly"
+          readonly
+          placeholder="Pending admin verification"
+        >
+
       </div>
+
       <div class="field">
-        <span class="label">NIN:</span>
-        <input id="nin" class="readonly" readonly placeholder="Pending admin verification">
+
+        <span class="label">
+          NIN:
+        </span>
+
+        <input
+          id="nin"
+          class="readonly"
+          readonly
+          placeholder="Pending admin verification"
+        >
+
       </div>
+
       <div class="field full">
-        <span class="label">Auto-Gen Code:</span>
-        <input id="autoGen" class="readonly" readonly placeholder="Pending admin verification">
+
+        <span class="label">
+          Auto-Gen Code:
+        </span>
+
+        <input
+          id="autoGen"
+          class="readonly"
+          readonly
+          placeholder="Pending admin verification"
+        >
+
       </div>
+
     </div>
 
-    <div id="status" class="status pending">
-      PENDING — APPLICATION NUMBER NOT YET PROVIDED
-    </div>
+    <!--
+      SYSTEM STATUS
+      Hidden from certificate and PDF.
+      It is kept only for internal JavaScript verification.
+    -->
+
+    <div
+      id="status"
+      class="status pending"
+      style="display:none"
+    ></div>
+
+    <!-- SIGNATURE -->
 
     <div class="sig">
+
       <div class="sigbox">
-        <b>TUYISHIME Japhet</b><br>
-        <span style="color:green;font-weight:bold">Head of NASHO Health Center</span>
+
+        <b>
+          TUYISHIME Japhet
+        </b>
+
+        <br>
+
+        <span
+          style="color:green;font-weight:bold"
+        >
+          Head of NASHO Health Center
+        </span>
+
         <div class="space"></div>
+
       </div>
+
     </div>
 
   </div>
+
 </div>
 
-<!-- PENDING INFORMATION -->
-<div class="pending-screen" id="pendingScreen">
-  <div class="big-icon">⏳</div>
-  <h2>Certificate Pending Administrative Verification</h2>
+<!-- =========================================================
+     PENDING INFORMATION
+========================================================= -->
+
+<div
+  class="pending-screen"
+  id="pendingScreen"
+>
+
+  <div class="big-icon">
+    ⏳
+  </div>
+
+  <h2>
+    Certificate Pending Administrative Verification
+  </h2>
+
   <p>
-    This birth record has been saved successfully, but the certificate
-    cannot be printed or treated as verified until the authorized
-    administrator enters the Application Number and NIN.
+    This birth record has been saved successfully,
+    but the certificate cannot be printed or treated
+    as verified until the authorized administrator
+    enters the Application Number and NIN.
   </p>
-  <button class="btn gray" id="backToHistoryBtn">Back to My Certificates</button>
+
+  <button
+    class="btn gray"
+    id="backToHistoryBtn"
+  >
+    Back to My Certificates
+  </button>
+
 </div>
 
-<!-- HISTORY -->
-<div class="history" id="history">
-  <h2>My Birth Certificates</h2>
-  <div id="historyBody" class="empty">Loading...</div>
+<!-- =========================================================
+     HISTORY
+========================================================= -->
+
+<div
+  class="history"
+  id="history"
+>
+
+  <h2>
+    My Birth Certificates
+  </h2>
+
+  <div
+    id="historyBody"
+    class="empty"
+  >
+    Loading...
+  </div>
+
 </div>
 
-<div id="toast" class="toast"></div>
+<!-- TOAST -->
+
+<div
+  id="toast"
+  class="toast"
+></div>
 
 <script>
+
 /* =========================================================
    NASHO BIRTH CERTIFICATE API
 ========================================================= */
+
 const API_URL =
 "https://script.google.com/macros/s/AKfycbxSTTkZzMhhq-G31VCG_3SVLsU_itk8EZ0g_A-i0ZUKtbSTuHid7sQfQ-SRr0GqIsRo/exec";
+
 
 /* =========================================================
    DOM
 ========================================================= */
+
 const $ = id => document.getElementById(id);
 
 const loginModal = $("loginModal");
+
 const username = $("username");
+
 const password = $("password");
+
 const loginBtn = $("loginBtn");
+
 const loginMsg = $("loginMsg");
 
 const topBar = $("top");
+
 const who = $("who");
+
 const logoutBtn = $("logoutBtn");
 
 const toolbar = $("toolbar");
+
 const newBtn = $("newBtn");
+
 const submitBtn = $("submitBtn");
+
 const printBtn = $("printBtn");
+
 const historyBtn = $("historyBtn");
 
 const wrap = $("wrap");
+
 const history = $("history");
+
 const historyBody = $("historyBody");
+
 const pendingScreen = $("pendingScreen");
+
 const backToHistoryBtn = $("backToHistoryBtn");
+
 const toast = $("toast");
 
+
+/* =========================================================
+   SESSION
+========================================================= */
+
 let session = null;
+
 let currentId = null;
+
 let currentStatus = "PENDING";
+
 
 /* =========================================================
    API
 ========================================================= */
-async function api(action, data = {}) {
-  const payload = { action, ...data };
 
-  try {
-    const response = await fetch(API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "text/plain;charset=utf-8"
+async function api(action,data={}){
+
+  const payload = {
+    action,
+    ...data
+  };
+
+  try{
+
+    const response = await fetch(API_URL,{
+      method:"POST",
+
+      headers:{
+        "Content-Type":"text/plain;charset=utf-8"
       },
-      body: JSON.stringify(payload)
+
+      body:JSON.stringify(payload)
     });
 
     const text = await response.text();
 
-    if (!text) {
-      throw new Error("Empty response from server.");
+    if(!text){
+      throw new Error(
+        "Empty response from server."
+      );
     }
 
     let result;
-    try {
+
+    try{
+
       result = JSON.parse(text);
-    } catch (err) {
-      console.error("Raw API response:", text);
-      throw new Error("Invalid server response.");
+
+    }catch(err){
+
+      console.error(
+        "Raw API response:",
+        text
+      );
+
+      throw new Error(
+        "Invalid server response."
+      );
     }
 
     return result;
 
-  } catch (error) {
-    console.error("API ERROR:", error);
+  }catch(error){
+
+    console.error(
+      "API ERROR:",
+      error
+    );
+
     throw error;
   }
 }
 
+
 /* =========================================================
    LOGIN
 ========================================================= */
-async function login() {
+
+async function login(){
+
   const u = username.value.trim();
+
   const p = password.value;
 
   loginMsg.textContent = "";
 
-  if (!u || !p) {
-    loginMsg.textContent = "Enter username and password.";
+  if(!u || !p){
+
+    loginMsg.textContent =
+      "Enter username and password.";
+
     return;
   }
 
   loginBtn.disabled = true;
-  loginBtn.textContent = "CONNECTING...";
 
-  try {
-    const result = await api("nurseLogin", {
-      username: u,
-      password: p
-    });
+  loginBtn.textContent =
+    "CONNECTING...";
 
-    if (!result.success) {
+  try{
+
+    const result = await api(
+      "nurseLogin",
+      {
+        username:u,
+        password:p
+      }
+    );
+
+    if(!result.success){
+
       loginMsg.textContent =
-        result.message || "Invalid username or password.";
+        result.message ||
+        "Invalid username or password.";
+
       return;
     }
 
@@ -688,100 +1485,268 @@ async function login() {
 
     openNurseSystem();
 
-  } catch (error) {
+  }catch(error){
+
     loginMsg.textContent =
       "Server connection error. Please check the API deployment.";
+
     console.error(error);
-  } finally {
+
+  }finally{
+
     loginBtn.disabled = false;
-    loginBtn.textContent = "LOGIN";
+
+    loginBtn.textContent =
+      "LOGIN";
   }
 }
 
-function openNurseSystem() {
-  if (!session || !session.token) {
-    loginMsg.textContent = "Invalid login session.";
+
+/* =========================================================
+   OPEN SYSTEM
+========================================================= */
+
+function openNurseSystem(){
+
+  if(
+    !session ||
+    !session.token
+  ){
+
+    loginMsg.textContent =
+      "Invalid login session.";
+
     return;
   }
 
-  who.textContent = session.name || session.username;
-  $("nurseName").value = session.name || "";
+  who.textContent =
+    session.name ||
+    session.username;
 
-  loginModal.classList.add("hidden");
-  topBar.style.display = "flex";
-  toolbar.style.display = "flex";
+  $("nurseName").value =
+    session.name || "";
+
+  loginModal.classList.add(
+    "hidden"
+  );
+
+  topBar.style.display =
+    "flex";
+
+  toolbar.style.display =
+    "flex";
 
   newCertificate();
 }
 
-function logout() {
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+function logout(){
+
   session = null;
+
   currentId = null;
-  currentStatus = "PENDING";
 
-  localStorage.removeItem("nasho_nurse_session");
+  currentStatus =
+    "PENDING";
 
-  loginModal.classList.remove("hidden");
-  topBar.style.display = "none";
-  toolbar.style.display = "none";
-  wrap.style.display = "none";
-  history.style.display = "none";
-  pendingScreen.style.display = "none";
+  localStorage.removeItem(
+    "nasho_nurse_session"
+  );
+
+  loginModal.classList.remove(
+    "hidden"
+  );
+
+  topBar.style.display =
+    "none";
+
+  toolbar.style.display =
+    "none";
+
+  wrap.style.display =
+    "none";
+
+  history.style.display =
+    "none";
+
+  pendingScreen.style.display =
+    "none";
 
   username.value = "";
+
   password.value = "";
+
   loginMsg.textContent = "";
 }
 
+
 /* =========================================================
-   FORM
+   FORM DATA
 ========================================================= */
-function fields() {
+
+function fields(){
+
   return {
-    motherName: $("motherName").value.trim(),
-    motherId: $("motherId").value.trim(),
-    motherPhone: $("motherPhone").value.trim(),
-    childName: $("childName").value.trim(),
-    childSex: $("childSex").value,
-    dob: $("dob").value,
-    tob: $("tob").value,
-    weight: $("weight").value,
-    height: $("height").value,
-    nurseName: $("nurseName").value,
-    fatherName: $("fatherName").value.trim(),
-    fatherId: $("fatherId").value.trim(),
-    fatherPhone: $("fatherPhone").value.trim(),
-    sector: $("sector").value,
-    cell: $("cell").value.trim(),
-    village: $("village").value.trim()
+
+    motherName:
+      $("motherName").value.trim(),
+
+    motherId:
+      $("motherId").value.trim(),
+
+    motherPhone:
+      $("motherPhone").value.trim(),
+
+    childName:
+      $("childName").value.trim(),
+
+    childSex:
+      $("childSex").value,
+
+    dob:
+      $("dob").value,
+
+    tob:
+      $("tob").value,
+
+    weight:
+      $("weight").value,
+
+    height:
+      $("height").value,
+
+    nurseName:
+      $("nurseName").value,
+
+    fatherName:
+      $("fatherName").value.trim(),
+
+    fatherId:
+      $("fatherId").value.trim(),
+
+    fatherPhone:
+      $("fatherPhone").value.trim(),
+
+    sector:
+      $("sector").value,
+
+    cell:
+      $("cell").value.trim(),
+
+    village:
+      $("village").value.trim()
   };
 }
 
-function validate() {
+
+/* =========================================================
+   VALIDATION
+========================================================= */
+
+function validate(){
+
   const data = fields();
 
   const required = [
-    ["motherName","Mother's Full Name"],
-    ["motherId","Mother's ID"],
-    ["motherPhone","Mother's Phone"],
-    ["childName","Child's Full Name"],
-    ["childSex","Child's Sex"],
-    ["dob","Date of Birth"],
-    ["tob","Time of Birth"],
-    ["weight","Weight"],
-    ["height","Height"],
-    ["fatherName","Father's Full Name"],
-    ["fatherId","Father's ID"],
-    ["fatherPhone","Father's Phone"],
-    ["sector","Sector"],
-    ["cell","Cell"],
-    ["village","Village"]
+
+    [
+      "motherName",
+      "Mother's Full Name"
+    ],
+
+    [
+      "motherId",
+      "Mother's ID"
+    ],
+
+    [
+      "motherPhone",
+      "Mother's Phone"
+    ],
+
+    [
+      "childName",
+      "Child's Full Name"
+    ],
+
+    [
+      "childSex",
+      "Child's Sex"
+    ],
+
+    [
+      "dob",
+      "Date of Birth"
+    ],
+
+    [
+      "tob",
+      "Time of Birth"
+    ],
+
+    [
+      "weight",
+      "Weight"
+    ],
+
+    [
+      "height",
+      "Height"
+    ],
+
+    [
+      "fatherName",
+      "Father's Full Name"
+    ],
+
+    [
+      "fatherId",
+      "Father's ID"
+    ],
+
+    [
+      "fatherPhone",
+      "Father's Phone"
+    ],
+
+    [
+      "sector",
+      "Sector"
+    ],
+
+    [
+      "cell",
+      "Cell"
+    ],
+
+    [
+      "village",
+      "Village"
+    ]
+
   ];
 
-  for (const [id,label] of required) {
-    if (!String(data[id] || "").trim()) {
-      alert("Please fill: " + label);
+  for(
+    const [id,label]
+    of required
+  ){
+
+    if(
+      !String(
+        data[id] || ""
+      ).trim()
+    ){
+
+      alert(
+        "Please fill: " + label
+      );
+
       $(id).focus();
+
       return false;
     }
   }
@@ -789,305 +1754,697 @@ function validate() {
   return true;
 }
 
-function clearForm() {
+
+/* =========================================================
+   CLEAR FORM
+========================================================= */
+
+function clearForm(){
+
   [
-    "motherName","motherId","motherPhone",
-    "childName","childSex","dob","tob",
-    "weight","height","fatherName","fatherId",
-    "fatherPhone","sector","cell","village",
-    "appNo","nin","autoGen"
-  ].forEach(id => {
+
+    "motherName",
+    "motherId",
+    "motherPhone",
+    "childName",
+    "childSex",
+    "dob",
+    "tob",
+    "weight",
+    "height",
+    "fatherName",
+    "fatherId",
+    "fatherPhone",
+    "sector",
+    "cell",
+    "village",
+    "appNo",
+    "nin",
+    "autoGen"
+
+  ].forEach(id=>{
+
     $(id).value = "";
+
   });
 
-  $("nurseName").value = session ? session.name : "";
+  $("nurseName").value =
+    session
+      ? session.name
+      : "";
 
-  $("appNo").placeholder = "Pending admin verification";
-  $("nin").placeholder = "Pending admin verification";
-  $("autoGen").placeholder = "Pending admin verification";
+  $("appNo").placeholder =
+    "Pending admin verification";
+
+  $("nin").placeholder =
+    "Pending admin verification";
+
+  $("autoGen").placeholder =
+    "Pending admin verification";
 
   currentId = null;
-  currentStatus = "PENDING";
+
+  currentStatus =
+    "PENDING";
 
   setStatus("PENDING");
-  printBtn.classList.add("hidden");
+
+  printBtn.classList.add(
+    "hidden"
+  );
 }
 
-function newCertificate() {
+
+/* =========================================================
+   NEW CERTIFICATE
+========================================================= */
+
+function newCertificate(){
+
   clearForm();
-  history.style.display = "none";
-  pendingScreen.style.display = "none";
-  wrap.style.display = "flex";
+
+  history.style.display =
+    "none";
+
+  pendingScreen.style.display =
+    "none";
+
+  wrap.style.display =
+    "flex";
 }
 
-function setStatus(status) {
-  currentStatus = status || "PENDING";
 
-  if (currentStatus === "VERIFIED") {
-    $("status").className = "status verified";
-    $("status").textContent =
-      "VERIFIED — CERTIFICATE AVAILABLE";
-    printBtn.classList.remove("hidden");
-  } else {
-    $("status").className = "status pending";
-    $("status").textContent =
-      "PENDING — APPLICATION NUMBER NOT YET PROVIDED";
-    printBtn.classList.add("hidden");
+/* =========================================================
+   INTERNAL STATUS
+   IMPORTANT:
+   This status is NOT displayed on certificate.
+========================================================= */
+
+function setStatus(status){
+
+  currentStatus =
+    status || "PENDING";
+
+  const statusElement =
+    $("status");
+
+  statusElement.textContent =
+    "";
+
+  statusElement.style.display =
+    "none";
+
+  if(
+    currentStatus ===
+    "VERIFIED"
+  ){
+
+    printBtn.classList.remove(
+      "hidden"
+    );
+
+  }else{
+
+    printBtn.classList.add(
+      "hidden"
+    );
   }
 }
+
 
 /* =========================================================
    SUBMIT
 ========================================================= */
-async function submitRecord() {
-  if (!session || !session.token) {
-    alert("Please login again.");
+
+async function submitRecord(){
+
+  if(
+    !session ||
+    !session.token
+  ){
+
+    alert(
+      "Please login again."
+    );
+
     return;
   }
 
-  if (!validate()) return;
+  if(!validate())
+    return;
 
-  if (!confirm("Submit this birth record?")) return;
+  if(
+    !confirm(
+      "Submit this birth record?"
+    )
+  )
+    return;
 
   submitBtn.disabled = true;
-  submitBtn.textContent = "SAVING...";
 
-  try {
-    const result = await api("submitBirth", {
-      token: session.token,
-      data: fields()
-    });
+  submitBtn.textContent =
+    "SAVING...";
 
-    if (result.success) {
-      currentId = result.id;
+  try{
+
+    const result =
+      await api(
+        "submitBirth",
+        {
+          token:session.token,
+
+          data:fields()
+        }
+      );
+
+    if(result.success){
+
+      currentId =
+        result.id;
 
       showToast(
         "Birth record saved successfully. The administrator must verify it before the certificate becomes available."
       );
 
       await loadMine();
-    } else {
-      alert(result.message || "Could not save record.");
+
+    }else{
+
+      alert(
+        result.message ||
+        "Could not save record."
+      );
     }
 
-  } catch (error) {
-    alert("Server error while saving the birth record.");
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.textContent = "Submit & Save";
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      "Server error while saving the birth record."
+    );
+
+  }finally{
+
+    submitBtn.disabled =
+      false;
+
+    submitBtn.textContent =
+      "Submit & Save";
   }
 }
+
 
 /* =========================================================
    HISTORY
 ========================================================= */
-async function loadMine() {
-  if (!session || !session.token) {
-    alert("Please login again.");
+
+async function loadMine(){
+
+  if(
+    !session ||
+    !session.token
+  ){
+
+    alert(
+      "Please login again."
+    );
+
     return;
   }
 
-  history.style.display = "block";
-  wrap.style.display = "none";
-  pendingScreen.style.display = "none";
-  historyBody.innerHTML = '<div class="empty">Loading...</div>';
+  history.style.display =
+    "block";
 
-  try {
-    const result = await api("myCertificates", {
-      token: session.token
-    });
+  wrap.style.display =
+    "none";
 
-    if (!result.success) {
+  pendingScreen.style.display =
+    "none";
+
+  historyBody.innerHTML =
+    '<div class="empty">Loading...</div>';
+
+  try{
+
+    const result =
+      await api(
+        "myCertificates",
+        {
+          token:
+            session.token
+        }
+      );
+
+    if(!result.success){
+
       historyBody.innerHTML =
         '<div class="empty">' +
-        esc(result.message || "Could not load records.") +
+        esc(
+          result.message ||
+          "Could not load records."
+        ) +
         '</div>';
+
       return;
     }
 
-    if (!result.records || !result.records.length) {
+    if(
+      !result.records ||
+      !result.records.length
+    ){
+
       historyBody.innerHTML =
         '<div class="empty">No birth certificates found.</div>';
+
       return;
     }
 
     historyBody.innerHTML =
       '<div class="table-wrap">' +
+
       '<table>' +
+
       '<thead>' +
+
       '<tr>' +
+
       '<th>Child</th>' +
+
       '<th>Date of Birth</th>' +
+
       '<th>Mother Phone</th>' +
+
       '<th>Status</th>' +
+
       '<th>Action</th>' +
+
       '</tr>' +
-      '</thead><tbody>' +
-      result.records.map(x => {
-        const verified = x.status === "VERIFIED";
+
+      '</thead>' +
+
+      '<tbody>' +
+
+      result.records
+      .map(x=>{
+
+        const verified =
+          x.status ===
+          "VERIFIED";
 
         return `
+
           <tr>
-            <td><b>${esc(x.childName)}</b></td>
-            <td>${esc(x.dob)}</td>
-            <td>${esc(x.motherPhone)}</td>
+
             <td>
-              <span class="pill ${verified ? "v" : "p"}">
+              <b>
+                ${esc(x.childName)}
+              </b>
+            </td>
+
+            <td>
+              ${esc(x.dob)}
+            </td>
+
+            <td>
+              ${esc(x.motherPhone)}
+            </td>
+
+            <td>
+
+              <span
+                class="pill ${
+                  verified
+                  ? "v"
+                  : "p"
+                }"
+              >
                 ${esc(x.status)}
               </span>
-            </td>
-            <td>
-              <button class="btn ${verified ? "green" : "gray"}"
-                onclick='viewRecord(${JSON.stringify(x).replace(/'/g,"&#39;")})'>
-                ${verified ? "VIEW CERTIFICATE" : "VIEW STATUS"}
-              </button>
-            </td>
-          </tr>
-        `;
-      }).join("") +
-      '</tbody></table></div>';
 
-  } catch (error) {
+            </td>
+
+            <td>
+
+              <button
+                class="btn ${
+                  verified
+                  ? "green"
+                  : "gray"
+                }"
+                onclick='viewRecord(
+                  ${JSON.stringify(x)
+                    .replace(
+                      /'/g,
+                      "&#39;"
+                    )}
+                )'
+              >
+
+                ${
+                  verified
+                  ? "VIEW CERTIFICATE"
+                  : "VIEW STATUS"
+                }
+
+              </button>
+
+            </td>
+
+          </tr>
+
+        `;
+
+      })
+      .join("") +
+
+      '</tbody>' +
+
+      '</table>' +
+
+      '</div>';
+
+  }catch(error){
+
+    console.error(error);
+
     historyBody.innerHTML =
       '<div class="empty">Server error while loading your records.</div>';
   }
 }
 
+
 /* =========================================================
    VIEW RECORD
 ========================================================= */
-function viewRecord(record) {
-  currentId = record.id;
-  currentStatus = record.status || "PENDING";
+
+function viewRecord(record){
+
+  currentId =
+    record.id;
+
+  currentStatus =
+    record.status ||
+    "PENDING";
 
   const map = {
-    motherName:"motherName",
-    motherId:"motherId",
-    motherPhone:"motherPhone",
-    childName:"childName",
-    childSex:"childSex",
-    dob:"dob",
-    tob:"tob",
-    weight:"weight",
-    height:"height",
-    nurseName:"nurseName",
-    fatherName:"fatherName",
-    fatherId:"fatherId",
-    fatherPhone:"fatherPhone",
-    sector:"sector",
-    cell:"cell",
-    village:"village"
+
+    motherName:
+      "motherName",
+
+    motherId:
+      "motherId",
+
+    motherPhone:
+      "motherPhone",
+
+    childName:
+      "childName",
+
+    childSex:
+      "childSex",
+
+    dob:
+      "dob",
+
+    tob:
+      "tob",
+
+    weight:
+      "weight",
+
+    height:
+      "height",
+
+    nurseName:
+      "nurseName",
+
+    fatherName:
+      "fatherName",
+
+    fatherId:
+      "fatherId",
+
+    fatherPhone:
+      "fatherPhone",
+
+    sector:
+      "sector",
+
+    cell:
+      "cell",
+
+    village:
+      "village"
+
   };
 
-  Object.keys(map).forEach(key => {
-    if ($(map[key])) {
-      $(map[key]).value = record[key] ?? "";
-    }
-  });
+  Object.keys(map)
+    .forEach(key=>{
 
-  $("appNo").value = record.applicationNumber || "";
-  $("nin").value = record.nin || "";
-  $("autoGen").value = record.autoGen || "";
+      if($(map[key])){
 
-  setStatus(record.status);
+        $(map[key]).value =
+          record[key] ?? "";
+      }
 
-  history.style.display = "none";
+    });
 
-  if (record.status === "VERIFIED") {
-    pendingScreen.style.display = "none";
-    wrap.style.display = "flex";
-  } else {
-    wrap.style.display = "none";
-    pendingScreen.style.display = "block";
+  $("appNo").value =
+    record.applicationNumber ||
+    "";
+
+  $("nin").value =
+    record.nin ||
+    "";
+
+  $("autoGen").value =
+    record.autoGen ||
+    "";
+
+  setStatus(
+    record.status
+  );
+
+  history.style.display =
+    "none";
+
+  if(
+    record.status ===
+    "VERIFIED"
+  ){
+
+    pendingScreen.style.display =
+      "none";
+
+    wrap.style.display =
+      "flex";
+
+  }else{
+
+    wrap.style.display =
+      "none";
+
+    pendingScreen.style.display =
+      "block";
   }
 }
 
+
 /* =========================================================
-   PRINT
+   PRINT / PDF
 ========================================================= */
-function printCertificate() {
-  if (currentStatus !== "VERIFIED") {
+
+function printCertificate(){
+
+  if(
+    currentStatus !==
+    "VERIFIED"
+  ){
+
     alert(
       "This certificate is still pending administrative verification."
     );
+
     return;
   }
+
+  /*
+    The status is intentionally hidden.
+    Only the certificate itself is printed.
+  */
 
   window.print();
 }
 
+
 /* =========================================================
-   HELPERS
+   ESCAPE HTML
 ========================================================= */
-function esc(value) {
-  return String(value ?? "").replace(
+
+function esc(value){
+
+  return String(
+    value ?? ""
+  ).replace(
     /[&<>"']/g,
-    m => ({
+
+    m=>({
+
       "&":"&amp;",
       "<":"&lt;",
       ">":"&gt;",
       '"':"&quot;",
       "'":"&#39;"
+
     }[m])
   );
 }
 
+
+/* =========================================================
+   TOAST
+========================================================= */
+
 let toastTimer = null;
 
-function showToast(message) {
-  toast.textContent = message;
-  toast.classList.add("show");
+function showToast(message){
 
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => {
-    toast.classList.remove("show");
-  }, 5000);
+  toast.textContent =
+    message;
+
+  toast.classList.add(
+    "show"
+  );
+
+  clearTimeout(
+    toastTimer
+  );
+
+  toastTimer =
+    setTimeout(
+      ()=>{
+        toast.classList.remove(
+          "show"
+        );
+      },
+      5000
+    );
 }
+
 
 /* =========================================================
    EVENTS
 ========================================================= */
-loginBtn.addEventListener("click", login);
 
-password.addEventListener("keydown", e => {
-  if (e.key === "Enter") login();
-});
+loginBtn.addEventListener(
+  "click",
+  login
+);
 
-username.addEventListener("keydown", e => {
-  if (e.key === "Enter") password.focus();
-});
+password.addEventListener(
+  "keydown",
+  e=>{
 
-logoutBtn.addEventListener("click", logout);
-newBtn.addEventListener("click", newCertificate);
-submitBtn.addEventListener("click", submitRecord);
-printBtn.addEventListener("click", printCertificate);
-historyBtn.addEventListener("click", loadMine);
-backToHistoryBtn.addEventListener("click", loadMine);
+    if(
+      e.key ===
+      "Enter"
+    ){
+
+      login();
+    }
+
+  }
+);
+
+username.addEventListener(
+  "keydown",
+  e=>{
+
+    if(
+      e.key ===
+      "Enter"
+    ){
+
+      password.focus();
+    }
+
+  }
+);
+
+logoutBtn.addEventListener(
+  "click",
+  logout
+);
+
+newBtn.addEventListener(
+  "click",
+  newCertificate
+);
+
+submitBtn.addEventListener(
+  "click",
+  submitRecord
+);
+
+printBtn.addEventListener(
+  "click",
+  printCertificate
+);
+
+historyBtn.addEventListener(
+  "click",
+  loadMine
+);
+
+backToHistoryBtn.addEventListener(
+  "click",
+  loadMine
+);
+
 
 /* =========================================================
    RESTORE LOGIN
 ========================================================= */
-(function restoreSession() {
-  try {
-    const saved = localStorage.getItem("nasho_nurse_session");
 
-    if (!saved) return;
+(function restoreSession(){
 
-    const parsed = JSON.parse(saved);
+  try{
 
-    if (
+    const saved =
+      localStorage.getItem(
+        "nasho_nurse_session"
+      );
+
+    if(!saved)
+      return;
+
+    const parsed =
+      JSON.parse(saved);
+
+    if(
       parsed &&
       parsed.username &&
       parsed.name &&
       parsed.token
-    ) {
-      session = parsed;
+    ){
+
+      session =
+        parsed;
+
       openNurseSystem();
     }
-  } catch (error) {
-    localStorage.removeItem("nasho_nurse_session");
+
+  }catch(error){
+
+    localStorage.removeItem(
+      "nasho_nurse_session"
+    );
+
   }
+
 })();
+
 </script>
 
 </body>
