@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,14 +9,14 @@
 
 <style>
 *{
-  box-sizing:border-box
+  box-sizing:border-box;
 }
 
 body{
   margin:0;
   background:#f1f5f9;
   font-family:Arial,sans-serif;
-  color:#172033
+  color:#172033;
 }
 
 .head{
@@ -25,19 +26,19 @@ body{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:10px
+  gap:10px;
 }
 
 .wrap{
   max-width:1400px;
   margin:20px auto;
-  padding:0 15px
+  padding:0 15px;
 }
 
 .cards{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:15px
+  gap:15px;
 }
 
 .card,
@@ -45,23 +46,23 @@ body{
   background:#fff;
   border-radius:12px;
   padding:20px;
-  box-shadow:0 3px 14px #0001
+  box-shadow:0 3px 14px #0001;
 }
 
 .card{
-  border-left:5px solid #003b70
+  border-left:5px solid #003b70;
 }
 
 .num{
   font-size:30px;
   font-weight:800;
-  margin-top:8px
+  margin-top:8px;
 }
 
 .search{
   display:flex;
   gap:10px;
-  margin:20px 0
+  margin:20px 0;
 }
 
 .search input{
@@ -69,7 +70,7 @@ body{
   padding:13px;
   border:1px solid #ccd4df;
   border-radius:8px;
-  font-size:15px
+  font-size:15px;
 }
 
 .btn{
@@ -79,29 +80,29 @@ body{
   background:#003b70;
   color:#fff;
   font-weight:bold;
-  cursor:pointer
+  cursor:pointer;
 }
 
 .btn:hover{
-  opacity:.9
+  opacity:.9;
 }
 
 .green{
-  background:#16833b
+  background:#16833b;
 }
 
 .red{
-  background:#b42318
+  background:#b42318;
 }
 
 .gray{
-  background:#64748b
+  background:#64748b;
 }
 
 .grid{
   display:grid;
   grid-template-columns:1fr 1fr 1fr;
-  gap:12px
+  gap:12px;
 }
 
 .grid input{
@@ -109,21 +110,21 @@ body{
   padding:11px;
   border:1px solid #ccd4df;
   border-radius:7px;
-  margin-top:5px
+  margin-top:5px;
 }
 
 .result{
-  margin-top:15px
+  margin-top:15px;
 }
 
 .table-wrap{
-  overflow-x:auto
+  overflow-x:auto;
 }
 
 .table{
   width:100%;
   border-collapse:collapse;
-  min-width:1000px
+  min-width:1100px;
 }
 
 .table th,
@@ -131,16 +132,16 @@ body{
   padding:10px;
   border-bottom:1px solid #ddd;
   text-align:left;
-  font-size:13px
+  font-size:13px;
 }
 
 .table th{
   background:#f8fafc;
-  color:#334155
+  color:#334155;
 }
 
 .table tr:hover{
-  background:#f8fafc
+  background:#f8fafc;
 }
 
 .status{
@@ -148,17 +149,17 @@ body{
   padding:5px 9px;
   border-radius:20px;
   font-size:11px;
-  font-weight:bold
+  font-weight:bold;
 }
 
 .pending{
   background:#fff7ed;
-  color:#c2410c
+  color:#c2410c;
 }
 
 .verified{
   background:#dcfce7;
-  color:#166534
+  color:#166534;
 }
 
 .login{
@@ -168,7 +169,7 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  z-index:100
+  z-index:100;
 }
 
 .loginbox{
@@ -176,12 +177,12 @@ body{
   padding:30px;
   background:#fff;
   box-shadow:0 10px 30px #0002;
-  border-radius:14px
+  border-radius:14px;
 }
 
 .loginbox h2{
   margin-top:0;
-  color:#003b70
+  color:#003b70;
 }
 
 .loginbox input{
@@ -189,11 +190,11 @@ body{
   padding:13px;
   margin:7px 0;
   border:1px solid #ccc;
-  border-radius:7px
+  border-radius:7px;
 }
 
 .hidden{
-  display:none!important
+  display:none!important;
 }
 
 .message{
@@ -201,37 +202,58 @@ body{
   border-radius:8px;
   margin-top:10px;
   background:#fef2f2;
-  color:#b42318
+  color:#b42318;
+}
+
+.success-message{
+  padding:12px;
+  border-radius:8px;
+  margin-top:10px;
+  background:#ecfdf5;
+  color:#166534;
 }
 
 .empty{
   text-align:center;
   padding:30px;
-  color:#64748b
+  color:#64748b;
 }
 
 .small{
   font-size:12px;
-  color:#64748b
+  color:#64748b;
+}
+
+.auto-box{
+  background:#f8fafc;
+  border:1px solid #dbe3ec;
+  border-radius:8px;
+  padding:10px;
+}
+
+.auto-box input{
+  background:#f1f5f9;
+  font-weight:bold;
+  color:#003b70;
 }
 
 @media(max-width:800px){
 
   .cards{
-    grid-template-columns:1fr
+    grid-template-columns:1fr;
   }
 
   .grid{
-    grid-template-columns:1fr
+    grid-template-columns:1fr;
   }
 
   .search{
-    flex-direction:column
+    flex-direction:column;
   }
 
   .head{
     flex-direction:column;
-    align-items:flex-start
+    align-items:flex-start;
   }
 }
 </style>
@@ -239,7 +261,10 @@ body{
 
 <body>
 
-<!-- LOGIN -->
+<!-- =====================================================
+     LOGIN
+===================================================== -->
+
 <div id="login" class="login">
 
   <div class="loginbox">
@@ -261,9 +286,11 @@ body{
       type="password"
       placeholder="Admin password"
       autocomplete="current-password"
+      onkeydown="if(event.key==='Enter') adminLogin()"
     >
 
     <button
+      id="loginBtn"
       class="btn"
       style="width:100%"
       onclick="adminLogin()"
@@ -278,7 +305,10 @@ body{
 </div>
 
 
-<!-- APPLICATION -->
+<!-- =====================================================
+     APPLICATION
+===================================================== -->
+
 <div id="app" class="hidden">
 
   <div class="head">
@@ -297,43 +327,60 @@ body{
 
   <div class="wrap">
 
-    <!-- STATISTICS -->
+    <!-- =================================================
+         STATISTICS
+    ================================================== -->
+
     <div class="cards">
 
       <div class="card">
+
         Pending
+
         <div
           class="num"
           id="pending"
         >
           0
         </div>
+
       </div>
 
+
       <div class="card">
+
         Verified
+
         <div
           class="num"
           id="verified"
         >
           0
         </div>
+
       </div>
 
+
       <div class="card">
+
         Total
+
         <div
           class="num"
           id="total"
         >
           0
         </div>
+
       </div>
 
     </div>
 
 
-    <!-- SEARCH -->
+    <!-- =================================================
+         SEARCH
+    ================================================== -->
+
     <div
       class="panel"
       style="margin-top:20px"
@@ -346,7 +393,7 @@ body{
         <input
           id="search"
           placeholder="Application Number, Mother's Phone, Child Name or Mother Name"
-          onkeydown="if(event.key==='Enter')searchRecord()"
+          onkeydown="if(event.key==='Enter') searchRecord()"
         >
 
         <button
@@ -370,7 +417,10 @@ body{
     </div>
 
 
-    <!-- EDIT / VERIFY -->
+    <!-- =================================================
+         ADMIN VERIFICATION
+    ================================================== -->
+
     <div
       class="panel"
       id="editPanel"
@@ -383,31 +433,57 @@ body{
 
       <div class="grid">
 
+        <!-- APPLICATION NUMBER -->
+
         <div>
-          <label>Application Number</label>
+
+          <label>
+            Application Number
+          </label>
 
           <input
             id="applicationNumber"
             placeholder="Application Number"
           >
+
         </div>
 
+
+        <!-- NIN -->
+
         <div>
-          <label>NIN</label>
+
+          <label>
+            NIN
+          </label>
 
           <input
             id="nin"
             placeholder="NIN"
           >
+
         </div>
 
-        <div>
-          <label>Auto-Gen Code</label>
+
+        <!-- AUTO GEN -->
+
+        <div class="auto-box">
+
+          <label>
+            Auto-Gen Code
+          </label>
 
           <input
             id="autoGen"
+            placeholder="Generated after verification"
             readonly
           >
+
+          <div class="small">
+            This code is generated by the server only
+            after successful verification.
+          </div>
+
         </div>
 
       </div>
@@ -415,6 +491,7 @@ body{
       <br>
 
       <button
+        id="verifyBtn"
         class="btn green"
         onclick="verify()"
       >
@@ -430,11 +507,22 @@ body{
 
 <script>
 
+/* =====================================================
+   API URL
+===================================================== */
+
 const API_URL =
 "https://script.google.com/macros/s/AKfycbxSTTkZzMhhq-G31VCG_3SVLsU_itk8EZ0g_A-i0ZUKtbSTuHid7sQfQ-SRr0GqIsRo/exec";
 
+
+/* =====================================================
+   GLOBAL VARIABLES
+===================================================== */
+
 let token = "";
+
 let selected = null;
+
 let allRecords = [];
 
 
@@ -445,33 +533,76 @@ let allRecords = [];
 async function api(action,data={}){
 
   const payload = {
-    action,
+    action: action,
     ...data
   };
 
-  const response = await fetch(API_URL,{
-    method:"POST",
-    body:new URLSearchParams({
-      payload:JSON.stringify(payload)
-    })
-  });
-
-  const text = await response.text();
-
   try{
 
-    return JSON.parse(text);
+    const response = await fetch(API_URL,{
+
+      method:"POST",
+
+      body:new URLSearchParams({
+
+        payload:JSON.stringify(payload)
+
+      })
+
+    });
+
+
+    const text =
+      await response.text();
+
+
+    console.log(
+      "API",
+      action,
+      text
+    );
+
+
+    try{
+
+      return JSON.parse(text);
+
+    }catch(error){
+
+      console.error(
+        "Invalid JSON:",
+        text
+      );
+
+      return {
+
+        success:false,
+
+        message:
+          "Invalid server response."
+
+      };
+
+    }
 
   }catch(error){
 
-    console.error(text);
+    console.error(
+      "API ERROR:",
+      error
+    );
 
     return {
+
       success:false,
-      message:"Invalid server response."
+
+      message:
+        "Server connection error."
+
     };
 
   }
+
 }
 
 
@@ -481,43 +612,105 @@ async function api(action,data={}){
 
 async function adminLogin(){
 
-  msg.textContent = "Connecting...";
+  const username =
+    document.getElementById("au")
+      .value.trim();
+
+  const password =
+    document.getElementById("ap")
+      .value;
+
+
+  if(!username){
+
+    msg.textContent =
+      "Admin username is required.";
+
+    return;
+
+  }
+
+
+  if(!password){
+
+    msg.textContent =
+      "Admin password is required.";
+
+    return;
+
+  }
+
+
+  const loginBtn =
+    document.getElementById(
+      "loginBtn"
+    );
+
+
+  loginBtn.disabled = true;
+
+  loginBtn.textContent =
+    "CONNECTING...";
+
+
+  msg.textContent =
+    "Connecting...";
+
 
   try{
 
     const r = await api(
+
       "adminLogin",
+
       {
-        username:au.value.trim(),
-        password:ap.value
+        username:username,
+        password:password
       }
+
     );
 
-    console.log("LOGIN RESPONSE:",r);
+
+    console.log(
+      "LOGIN RESPONSE:",
+      r
+    );
+
 
     if(r.success){
 
-      token = r.token;
+      token = r.token || "";
+
 
       sessionStorage.setItem(
         "nasho_admin_token",
         token
       );
 
-      login.classList.add("hidden");
 
-      app.classList.remove("hidden");
+      document
+        .getElementById("login")
+        .classList.add("hidden");
+
+
+      document
+        .getElementById("app")
+        .classList.remove("hidden");
+
 
       msg.textContent = "";
+
 
       await loadStats();
 
       await loadAllRecords();
 
+
     }else{
 
       msg.textContent =
-        r.message || "Invalid login";
+        r.message ||
+        "Invalid login.";
 
     }
 
@@ -529,6 +722,13 @@ async function adminLogin(){
       "Server connection error.";
 
   }
+
+
+  loginBtn.disabled = false;
+
+  loginBtn.textContent =
+    "LOGIN";
+
 }
 
 
@@ -539,26 +739,46 @@ async function adminLogin(){
 async function loadStats(){
 
   const r = await api(
+
     "stats",
+
     {
-      token
+      token:token
     }
+
   );
 
-  console.log("STATS:",r);
 
-  if(r.success){
+  console.log(
+    "STATS:",
+    r
+  );
 
-    pending.textContent =
-      r.pending ?? 0;
 
-    verified.textContent =
-      r.verified ?? 0;
+  if(!r.success){
 
-    total.textContent =
-      r.total ?? 0;
+    return;
 
   }
+
+
+  document
+    .getElementById("pending")
+    .textContent =
+      r.pending ?? 0;
+
+
+  document
+    .getElementById("verified")
+    .textContent =
+      r.verified ?? 0;
+
+
+  document
+    .getElementById("total")
+    .textContent =
+      r.total ?? 0;
+
 }
 
 
@@ -569,31 +789,50 @@ async function loadStats(){
 async function loadAllRecords(){
 
   results.innerHTML =
-    `<div class="empty">Loading records...</div>`;
+    `<div class="empty">
+      Loading records...
+    </div>`;
+
 
   const r = await api(
+
     "adminAll",
+
     {
-      token
+      token:token
     }
+
   );
 
-  console.log("ALL RECORDS:",r);
+
+  console.log(
+    "ALL RECORDS:",
+    r
+  );
+
 
   if(!r.success){
 
     results.innerHTML =
-      `<div class="message">${e(r.message)}</div>`;
+      `<div class="message">
+        ${e(r.message)}
+      </div>`;
 
     return;
+
   }
+
 
   allRecords =
     Array.isArray(r.records)
       ? r.records
       : [];
 
-  renderRecords(allRecords);
+
+  renderRecords(
+    allRecords
+  );
+
 }
 
 
@@ -606,129 +845,192 @@ function renderRecords(records){
   if(!records.length){
 
     results.innerHTML = `
+
       <div class="empty">
-        No birth certificate records found.
+
+        No birth certificate
+        records found.
+
       </div>
+
     `;
 
     return;
+
   }
 
 
   let html = `
 
     <div style="margin-bottom:10px">
+
       <b>${records.length}</b>
       record(s) found.
+
     </div>
 
     <div class="table-wrap">
 
-    <table class="table">
+      <table class="table">
 
-      <thead>
+        <thead>
 
-        <tr>
+          <tr>
 
-          <th>#</th>
+            <th>#</th>
 
-          <th>Child</th>
+            <th>Child</th>
 
-          <th>Mother</th>
+            <th>Mother</th>
 
-          <th>Mother Phone</th>
+            <th>Mother Phone</th>
 
-          <th>DOB</th>
+            <th>DOB</th>
 
-          <th>Sex</th>
+            <th>Sex</th>
 
-          <th>Status</th>
+            <th>Status</th>
 
-          <th>Application No.</th>
+            <th>Application No.</th>
 
-          <th>NIN</th>
+            <th>NIN</th>
 
-          <th>Auto-Gen</th>
+            <th>Auto-Gen</th>
 
-          <th>Action</th>
+            <th>Action</th>
 
-        </tr>
+          </tr>
 
-      </thead>
+        </thead>
 
-      <tbody>
+        <tbody>
+
   `;
 
 
-  records.forEach((record,index)=>{
+  records.forEach(
 
-    const status =
-      String(record.status || "").toUpperCase();
+    (record,index)=>{
 
-    const statusClass =
-      status === "VERIFIED"
-        ? "verified"
-        : "pending";
+      const status =
 
-    html += `
+        String(
+          record.status || ""
+        ).toUpperCase();
 
-      <tr>
 
-        <td>${index+1}</td>
+      const statusClass =
 
-        <td>${e(record.childName)}</td>
+        status === "VERIFIED"
 
-        <td>${e(record.motherName)}</td>
+          ? "verified"
 
-        <td>${e(record.motherPhone)}</td>
+          : "pending";
 
-        <td>${e(record.dob)}</td>
 
-        <td>${e(record.sex)}</td>
+      const safeRecord =
+        JSON.stringify(record)
+          .replace(/\\/g,"\\\\")
+          .replace(/'/g,"&#39;");
 
-        <td>
 
-          <span class="status ${statusClass}">
-            ${e(status || "PENDING")}
-          </span>
+      html += `
 
-        </td>
+        <tr>
 
-        <td>${e(record.applicationNumber)}</td>
+          <td>
+            ${index+1}
+          </td>
 
-        <td>${e(record.nin)}</td>
+          <td>
+            ${e(record.childName)}
+          </td>
 
-        <td>${e(record.autoGen)}</td>
+          <td>
+            ${e(record.motherName)}
+          </td>
 
-        <td>
+          <td>
+            ${e(record.motherPhone)}
+          </td>
 
-          <button
-            class="btn"
-            style="padding:7px 10px"
-            onclick='selectRecord(${JSON.stringify(record).replace(/'/g,"&#39;")})'
-          >
-            ${status === "VERIFIED" ? "VIEW" : "VERIFY"}
-          </button>
+          <td>
+            ${e(record.dob)}
+          </td>
 
-        </td>
+          <td>
+            ${e(record.sex)}
+          </td>
 
-      </tr>
+          <td>
 
-    `;
+            <span
+              class="status ${statusClass}"
+            >
 
-  });
+              ${e(
+                status || "PENDING"
+              )}
+
+            </span>
+
+          </td>
+
+          <td>
+            ${e(
+              record.applicationNumber
+            )}
+          </td>
+
+          <td>
+            ${e(record.nin)}
+          </td>
+
+          <td>
+            ${e(record.autoGen)}
+          </td>
+
+          <td>
+
+            <button
+              class="btn"
+              style="padding:7px 10px"
+              onclick='selectRecord(${safeRecord})'
+            >
+
+              ${
+                status === "VERIFIED"
+                  ? "VIEW"
+                  : "VERIFY"
+              }
+
+            </button>
+
+          </td>
+
+        </tr>
+
+      `;
+
+    }
+
+  );
 
 
   html += `
 
-      </tbody>
+        </tbody>
 
-    </table>
+      </table>
 
     </div>
+
   `;
 
-  results.innerHTML = html;
+
+  results.innerHTML =
+    html;
+
 }
 
 
@@ -739,55 +1041,95 @@ function renderRecords(records){
 async function searchRecord(){
 
   const q =
-    search.value.trim();
+    document
+      .getElementById("search")
+      .value
+      .trim();
+
 
   if(!q){
 
-    loadAllRecords();
+    await loadAllRecords();
 
     return;
+
   }
 
+
   results.innerHTML =
-    `<div class="empty">Searching...</div>`;
+    `<div class="empty">
+      Searching...
+    </div>`;
+
 
   const r = await api(
+
     "adminSearch",
+
     {
-      token,
+      token:token,
       query:q
     }
+
   );
 
-  console.log("SEARCH:",r);
+
+  console.log(
+    "SEARCH:",
+    r
+  );
+
 
   if(!r.success){
 
     results.innerHTML =
       `<div class="message">
-        ${e(r.message || "No record found.")}
+
+        ${e(
+          r.message ||
+          "No record found."
+        )}
+
       </div>`;
+
 
     editPanel.style.display =
       "none";
 
+
     return;
+
   }
 
-  if(r.records && Array.isArray(r.records)){
 
-    renderRecords(r.records);
+  if(
+
+    r.records &&
+    Array.isArray(r.records)
+
+  ){
+
+    renderRecords(
+      r.records
+    );
+
 
   }else if(r.record){
 
-    renderRecords([r.record]);
+    renderRecords([
+      r.record
+    ]);
+
 
   }else{
 
     results.innerHTML =
-      `<div class="empty">No record found.</div>`;
+      `<div class="empty">
+        No record found.
+      </div>`;
 
   }
+
 }
 
 
@@ -799,38 +1141,76 @@ function selectRecord(record){
 
   selected = record;
 
+
   recordInfo.innerHTML = `
-    <b>Child:</b> ${e(record.childName)}
+
+    <b>Child:</b>
+    ${e(record.childName)}
+
     &nbsp; | &nbsp;
 
-    <b>Mother:</b> ${e(record.motherName)}
+    <b>Mother:</b>
+    ${e(record.motherName)}
+
     &nbsp; | &nbsp;
 
-    <b>DOB:</b> ${e(record.dob)}
+    <b>DOB:</b>
+    ${e(record.dob)}
+
     <br><br>
 
-    <b>Phone:</b> ${e(record.motherPhone)}
+    <b>Phone:</b>
+    ${e(record.motherPhone)}
+
     &nbsp; | &nbsp;
 
-    <b>Status:</b> ${e(record.status)}
+    <b>Status:</b>
+    ${e(record.status)}
+
   `;
 
-  applicationNumber.value =
-    record.applicationNumber || "";
 
-  nin.value =
-    record.nin || "";
+  document
+    .getElementById(
+      "applicationNumber"
+    )
+    .value =
+      record.applicationNumber || "";
 
-  autoGen.value =
-    record.autoGen || "";
+
+  document
+    .getElementById("nin")
+    .value =
+      record.nin || "";
+
+
+  /*
+   * IMPORTANT:
+   *
+   * Existing Auto-Gen code is ONLY displayed.
+   *
+   * We DO NOT generate a new one here.
+   */
+
+  document
+    .getElementById("autoGen")
+    .value =
+      record.autoGen || "";
+
 
   editPanel.style.display =
     "block";
 
+
   window.scrollTo({
-    top:editPanel.offsetTop - 20,
+
+    top:
+      editPanel.offsetTop - 20,
+
     behavior:"smooth"
+
   });
+
 }
 
 
@@ -842,16 +1222,32 @@ async function verify(){
 
   if(!selected){
 
-    alert("Please select a record first.");
+    alert(
+      "Please select a record first."
+    );
 
     return;
+
   }
 
+
   const application =
-    applicationNumber.value.trim();
+
+    document
+      .getElementById(
+        "applicationNumber"
+      )
+      .value
+      .trim();
+
 
   const ninValue =
-    nin.value.trim();
+
+    document
+      .getElementById("nin")
+      .value
+      .trim();
+
 
   if(!application){
 
@@ -860,7 +1256,9 @@ async function verify(){
     );
 
     return;
+
   }
+
 
   if(!ninValue){
 
@@ -869,13 +1267,39 @@ async function verify(){
     );
 
     return;
+
   }
 
 
+  const verifyBtn =
+    document.getElementById(
+      "verifyBtn"
+    );
+
+
+  verifyBtn.disabled = true;
+
+  verifyBtn.textContent =
+    "VERIFYING...";
+
+
+  /*
+   * IMPORTANT
+   *
+   * There is NO Auto-Gen generation
+   * inside this frontend.
+   *
+   * The backend MUST generate the code
+   * only when verifyBirth is executed.
+   */
+
   const r = await api(
+
     "verifyBirth",
+
     {
-      token,
+
+      token:token,
 
       id:selected.id,
 
@@ -883,36 +1307,74 @@ async function verify(){
         application,
 
       nin:ninValue
+
     }
+
+  );
+
+
+  console.log(
+    "VERIFY RESPONSE:",
+    r
   );
 
 
   if(r.success){
 
+    const generatedCode =
+      r.autoGen || "";
+
+
+    document
+      .getElementById("autoGen")
+      .value =
+        generatedCode;
+
+
     alert(
-      "Certificate verified successfully."
+
+      "Certificate verified successfully.\n\n" +
+
+      "Auto-Gen Code: " +
+
+      (
+        generatedCode ||
+        "Not generated"
+      )
+
     );
 
-    autoGen.value =
-      r.autoGen || "";
 
     await loadStats();
 
     await loadAllRecords();
 
+
     editPanel.style.display =
       "none";
 
+
     selected = null;
+
 
   }else{
 
     alert(
+
       r.message ||
+
       "Could not verify certificate."
+
     );
 
   }
+
+
+  verifyBtn.disabled = false;
+
+  verifyBtn.textContent =
+    "SAVE & VERIFY";
+
 }
 
 
@@ -924,11 +1386,14 @@ function logout(){
 
   token = "";
 
+  selected = null;
+
   sessionStorage.removeItem(
     "nasho_admin_token"
   );
 
   location.reload();
+
 }
 
 
@@ -938,17 +1403,28 @@ function logout(){
 
 function e(s){
 
-  return String(s ?? "")
-    .replace(
-      /[&<>"']/g,
-      m => ({
-        "&":"&amp;",
-        "<":"&lt;",
-        ">":"&gt;",
-        '"':"&quot;",
-        "'":"&#39;"
-      }[m])
-    );
+  return String(
+    s ?? ""
+  )
+
+  .replace(
+    /[&<>"']/g,
+
+    m => ({
+
+      "&":"&amp;",
+
+      "<":"&lt;",
+
+      ">":"&gt;",
+
+      '"':"&quot;",
+
+      "'":"&#39;"
+
+    }[m])
+
+  );
 
 }
 
@@ -958,36 +1434,48 @@ function e(s){
 ===================================================== */
 
 window.addEventListener(
+
   "DOMContentLoaded",
+
   async()=>{
 
     const saved =
+
       sessionStorage.getItem(
         "nasho_admin_token"
       );
 
-    if(saved){
 
-      token = saved;
+    if(!saved){
 
-      login.classList.add(
-        "hidden"
-      );
-
-      app.classList.remove(
-        "hidden"
-      );
-
-      await loadStats();
-
-      await loadAllRecords();
+      return;
 
     }
 
+
+    token = saved;
+
+
+    document
+      .getElementById("login")
+      .classList.add("hidden");
+
+
+    document
+      .getElementById("app")
+      .classList.remove("hidden");
+
+
+    await loadStats();
+
+    await loadAllRecords();
+
   }
+
 );
 
 </script>
 
 </body>
 </html>
+```
