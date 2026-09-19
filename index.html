@@ -2,159 +2,1093 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>NASHO Health Center | Birth Certificate</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#003b70">
+<title>NASHO Health Center | Medical Birth Certificate</title>
+
 <style>
-:root{--blue:#003b70;--blue2:#005b96;--green:#16833b;--bg:#eef3f7;--red:#b42318}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Arial,sans-serif;color:#111}
-.top{background:#002d55;color:#fff;padding:12px 22px;display:flex;justify-content:space-between;align-items:center;gap:10px}
-.top button,.btn{border:0;border-radius:7px;padding:11px 17px;font-weight:700;cursor:pointer;color:#fff;background:var(--blue)}
-.top button{background:#c62828}.toolbar{display:none;padding:15px;gap:10px;flex-wrap:wrap;justify-content:center}
-.btn.green{background:var(--green)}.btn.orange{background:#b96b00}.btn.gray{background:#666}
-.wrap{display:none;justify-content:center;padding:18px;overflow:auto}.cert{width:210mm;min-height:297mm;background:#fff;border:8px double var(--blue);padding:14mm 16mm;box-shadow:0 4px 20px #0002;font-family:"Times New Roman",serif}
-.head{text-align:center;border-bottom:3px solid var(--blue);padding-bottom:10px}.arms{width:82px;height:82px;object-fit:contain}.head h3{margin:2px;font-size:16px}.head h1{margin:9px 0 3px;color:var(--blue);font-size:27px;text-decoration:underline}.contact{font-size:13px}.title{font-weight:bold;color:var(--blue);font-size:16px;border-bottom:1.5px solid #777;padding-bottom:4px;margin:18px 0 10px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:13px 20px}.full{grid-column:1/-1}.field{display:flex;align-items:center;min-height:29px}.label{font-weight:700;white-space:nowrap;margin-right:7px;font-size:14px}input,select{flex:1;min-width:0;border:0;border-bottom:1.5px dotted #333;background:transparent;padding:3px 4px;font:14px "Times New Roman",serif;outline:0}input:focus,select:focus{background:#eef7ff;border-bottom:2px solid var(--blue)}
-.big input{font-weight:bold;text-transform:uppercase;font-size:15px}.sig{display:flex;justify-content:flex-end;margin-top:30px}.sigbox{text-align:center;width:280px;font-size:15px}.space{height:48px}.status{padding:10px;text-align:center;margin-top:12px;font-weight:bold}.pending{background:#fff4d6;color:#805b00}.verified{background:#e5f6ea;color:#146c2e}
-.modal{position:fixed;inset:0;background:#fff;display:flex;align-items:center;justify-content:center;z-index:99}.login{width:min(420px,92%);background:#ffffffee;padding:30px;border-radius:14px;box-shadow:0 10px 35px #0003;text-align:center}.login h2{color:var(--blue)}.login input{width:100%;border:1px solid #ccc;border-radius:7px;padding:13px;margin:7px 0;font:14px Arial}.login button{width:100%;margin-top:10px}.hidden{display:none!important}
-.history{display:none;background:#fff;margin:0 auto 20px;width:min(1100px,96%);padding:20px;border-radius:10px}.history table{width:100%;border-collapse:collapse}.history th,.history td{padding:9px;border-bottom:1px solid #ddd;text-align:left;font-size:13px}.pill{padding:4px 8px;border-radius:12px;font-weight:bold}.p{background:#fff0c2}.v{background:#dff3e5;color:#12652a}
-@media(max-width:800px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.cert{width:100%;min-height:auto;padding:18px;border-width:5px}.field{align-items:flex-start;flex-direction:column}.label{margin-bottom:3px;white-space:normal}.head h1{font-size:22px}}
-@media print{@page{size:A4 portrait;margin:4mm}body{background:#fff}.top,.toolbar,.history,.modal{display:none!important}.wrap{display:block!important;padding:0}.cert{box-shadow:none;width:198mm;min-height:289mm;margin:auto;border:5px double var(--blue);padding:10mm 12mm}}
+:root{
+  --blue:#003b70;
+  --blue2:#005b96;
+  --green:#16833b;
+  --light:#eef4f8;
+  --white:#fff;
+  --red:#b42318;
+  --orange:#b96b00;
+  --text:#152033;
+  --border:#d7e0e8;
+  --shadow:0 10px 35px rgba(0,0,0,.10);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:linear-gradient(135deg,#eef5f9,#f8fbfd);
+  color:var(--text);
+  font-family:Arial,sans-serif;
+}
+button,input,select{font:inherit}
+button{cursor:pointer}
+
+.top{
+  display:none;
+  position:sticky;
+  top:0;
+  z-index:30;
+  background:linear-gradient(90deg,#002d55,#005b96);
+  color:#fff;
+  padding:12px 20px;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  box-shadow:0 2px 12px #0002;
+}
+.top-title{font-weight:800}
+.top-user{font-size:14px}
+.logout{
+  border:0;
+  border-radius:8px;
+  padding:10px 15px;
+  background:#c62828;
+  color:#fff;
+  font-weight:700;
+}
+
+.toolbar{
+  display:none;
+  max-width:1250px;
+  margin:0 auto;
+  padding:14px 16px 8px;
+  gap:9px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.btn{
+  border:0;
+  border-radius:9px;
+  padding:11px 16px;
+  background:var(--blue);
+  color:#fff;
+  font-weight:800;
+  box-shadow:0 2px 7px #0001;
+}
+.btn:hover{filter:brightness(1.08)}
+.btn.green{background:var(--green)}
+.btn.orange{background:var(--orange)}
+.btn.gray{background:#606b75}
+.btn.red{background:var(--red)}
+
+.wrap{
+  display:none;
+  justify-content:center;
+  padding:15px;
+  overflow:auto;
+}
+.cert{
+  width:210mm;
+  min-height:297mm;
+  background:#fff;
+  border:8px double var(--blue);
+  padding:13mm 15mm;
+  box-shadow:var(--shadow);
+  font-family:"Times New Roman",serif;
+}
+.head{
+  text-align:center;
+  border-bottom:3px solid var(--blue);
+  padding-bottom:9px;
+}
+.arms{
+  width:88px;
+  height:88px;
+  object-fit:contain;
+}
+.head h3{margin:2px;font-size:16px}
+.head h1{
+  margin:9px 0 3px;
+  color:var(--blue);
+  font-size:28px;
+  text-decoration:underline;
+  letter-spacing:.3px;
+}
+.contact{font-size:13px}
+.title{
+  font-weight:800;
+  color:var(--blue);
+  font-size:16px;
+  border-bottom:1.5px solid #777;
+  padding-bottom:4px;
+  margin:17px 0 10px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px 20px;
+}
+.full{grid-column:1/-1}
+.field{
+  display:flex;
+  align-items:center;
+  min-height:31px;
+}
+.label{
+  font-weight:700;
+  white-space:nowrap;
+  margin-right:7px;
+  font-size:14px;
+}
+.field input,.field select{
+  flex:1;
+  min-width:0;
+  border:0;
+  border-bottom:1.5px dotted #333;
+  background:transparent;
+  padding:3px 4px;
+  outline:0;
+  color:#111;
+  font:14px "Times New Roman",serif;
+}
+.field input:focus,.field select:focus{
+  background:#eef7ff;
+  border-bottom:2px solid var(--blue);
+}
+.big input{
+  font-weight:700;
+  text-transform:uppercase;
+  font-size:15px;
+}
+.readonly{
+  background:#f4f7fa!important;
+}
+.status{
+  padding:11px;
+  text-align:center;
+  margin-top:13px;
+  border-radius:5px;
+  font-weight:800;
+}
+.pending{background:#fff4d6;color:#805b00}
+.verified{background:#e5f6ea;color:#146c2e}
+.sig{
+  display:flex;
+  justify-content:flex-end;
+  margin-top:30px;
+}
+.sigbox{
+  text-align:center;
+  width:280px;
+  font-size:15px;
+}
+.space{height:48px}
+
+/* Login */
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(circle at top,#e6f2fb 0,#f5f9fc 42%,#edf3f7 100%);
+  padding:20px;
+}
+.login{
+  width:min(430px,100%);
+  background:#fff;
+  padding:34px 30px 30px;
+  border-radius:18px;
+  box-shadow:0 18px 55px #0002;
+  text-align:center;
+  border:1px solid #e2eaf0;
+}
+.login-logo{
+  width:90px;
+  height:90px;
+  object-fit:contain;
+  margin-bottom:5px;
+}
+.login h1{
+  margin:5px 0;
+  color:var(--blue);
+  font-size:23px;
+}
+.login h2{
+  margin:3px 0 5px;
+  color:#333;
+  font-size:17px;
+}
+.login p{
+  color:#65717d;
+  margin:7px 0 16px;
+}
+.login input{
+  width:100%;
+  border:1px solid #cbd5df;
+  border-radius:9px;
+  padding:13px 14px;
+  margin:6px 0;
+  outline:0;
+}
+.login input:focus{border-color:var(--blue2);box-shadow:0 0 0 3px #005b9618}
+.login .btn{width:100%;margin-top:9px;padding:13px}
+.login-msg{
+  min-height:21px;
+  color:var(--red);
+  font-size:14px;
+  font-weight:700;
+}
+.api-ok{
+  margin-top:15px;
+  padding:8px;
+  border-radius:8px;
+  background:#edf8f0;
+  color:#17672f;
+  font-size:12px;
+}
+
+/* History */
+.history{
+  display:none;
+  max-width:1150px;
+  margin:10px auto 25px;
+  background:#fff;
+  padding:22px;
+  border-radius:13px;
+  box-shadow:var(--shadow);
+}
+.history h2{margin-top:0;color:var(--blue)}
+.table-wrap{overflow:auto}
+.history table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:650px;
+}
+.history th,.history td{
+  padding:10px;
+  border-bottom:1px solid #e2e7eb;
+  text-align:left;
+  font-size:13px;
+}
+.history th{background:#f2f6f9;color:#334}
+.pill{
+  display:inline-block;
+  padding:4px 9px;
+  border-radius:20px;
+  font-weight:800;
+  font-size:11px;
+}
+.pill.p{background:#fff0c2;color:#805b00}
+.pill.v{background:#dff3e5;color:#12652a}
+.empty{
+  padding:25px;
+  text-align:center;
+  color:#66727d;
+}
+
+/* Pending screen */
+.pending-screen{
+  display:none;
+  max-width:800px;
+  margin:35px auto;
+  background:#fff;
+  padding:35px;
+  border-radius:15px;
+  box-shadow:var(--shadow);
+  text-align:center;
+}
+.pending-screen h2{color:var(--orange)}
+.pending-screen .big-icon{font-size:46px}
+
+/* Toast */
+.toast{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  z-index:2000;
+  max-width:380px;
+  background:#172033;
+  color:#fff;
+  padding:13px 16px;
+  border-radius:10px;
+  box-shadow:var(--shadow);
+  display:none;
+  font-size:14px;
+}
+.toast.show{display:block}
+
+.hidden{display:none!important}
+
+@media(max-width:800px){
+  .top{padding:11px 13px}
+  .top-title{font-size:13px}
+  .top-user{font-size:12px}
+  .toolbar{padding:10px}
+  .toolbar .btn{flex:1 1 44%;font-size:12px;padding:10px 8px}
+  .wrap{padding:8px}
+  .cert{
+    width:100%;
+    min-height:auto;
+    padding:17px;
+    border-width:5px;
+  }
+  .grid{grid-template-columns:1fr}
+  .full{grid-column:auto}
+  .field{
+    align-items:flex-start;
+    flex-direction:column;
+    min-height:55px;
+  }
+  .label{margin-bottom:4px;white-space:normal}
+  .field input,.field select{width:100%}
+  .head h1{font-size:22px}
+  .history{margin:8px;padding:15px}
+}
+
+@media print{
+  @page{size:A4 portrait;margin:4mm}
+  body{background:#fff}
+  .top,.toolbar,.history,.modal,.pending-screen,.toast{display:none!important}
+  .wrap{display:block!important;padding:0}
+  .cert{
+    width:198mm;
+    min-height:289mm;
+    margin:auto;
+    box-shadow:none;
+    border:5px double var(--blue);
+    padding:10mm 12mm;
+  }
+}
 </style>
 </head>
+
 <body>
+
+<!-- LOGIN -->
 <div id="loginModal" class="modal">
-<div class="login">
-<h2>NASHO HEALTH CENTER</h2><p>Nurse Login</p>
-<input id="username" placeholder="Username" autocomplete="username">
-<input id="password" type="password" placeholder="Password" autocomplete="current-password">
-<button class="btn" onclick="login()">LOGIN</button>
-<p id="loginMsg" style="color:#b42318"></p>
-</div></div>
+  <div class="login">
+    <img class="login-logo"
+      src="https://upload.wikimedia.org/wikipedia/commons/1/17/Coat_of_arms_of_Rwanda.svg"
+      alt="Rwanda Coat of Arms"
+      onerror="this.style.display='none'">
 
-<div class="top" id="top" style="display:none">
-<div>Logged in: <b id="who"></b></div><button onclick="logout()">Logout</button>
+    <h1>NASHO HEALTH CENTER</h1>
+    <h2>Medical Birth Certificate System</h2>
+    <p>Nurse Login</p>
+
+    <input id="username" type="text" placeholder="Username" autocomplete="username">
+    <input id="password" type="password" placeholder="Password / PIN" autocomplete="current-password">
+
+    <button class="btn" id="loginBtn">LOGIN</button>
+
+    <div id="loginMsg" class="login-msg"></div>
+
+    <div class="api-ok">
+      Secure connection to NASHO Birth Certificate API
+    </div>
+  </div>
 </div>
+
+<!-- TOP BAR -->
+<div class="top" id="top">
+  <div class="top-title">NASHO BIRTH CERTIFICATE SYSTEM</div>
+  <div class="top-user">Nurse: <b id="who"></b></div>
+  <button class="logout" id="logoutBtn">Logout</button>
+</div>
+
+<!-- TOOLBAR -->
 <div class="toolbar" id="toolbar">
-<button class="btn" onclick="newCertificate()">New Certificate</button>
-<button class="btn green" onclick="submitRecord()">Submit & Save</button>
-<button class="btn orange" onclick="window.print()">Print / PDF</button>
-<button class="btn gray" onclick="loadMine()">My Certificates</button>
+  <button class="btn" id="newBtn">New Certificate</button>
+  <button class="btn green" id="submitBtn">Submit & Save</button>
+  <button class="btn orange hidden" id="printBtn">Print / PDF</button>
+  <button class="btn gray" id="historyBtn">My Certificates</button>
 </div>
 
+<!-- CERTIFICATE -->
 <div class="wrap" id="wrap">
-<div class="cert" id="certificate">
-<div class="head">
-<img class="arms" src="https://upload.wikimedia.org/wikipedia/commons/1/17/Coat_of_arms_of_Rwanda.svg">
-<h3>REPUBLIC OF RWANDA</h3><h3>EASTERN PROVINCE</h3><h3>KIREHE DISTRICT</h3><h3>NASHO HEALTH CENTER</h3>
-<div class="contact"><b>Email: nashohc0428@gmail.com</b></div>
-<h1>MEDICAL BIRTH CERTIFICATE</h1>
+  <div class="cert" id="certificate">
+
+    <div class="head">
+      <img class="arms" src="https://upload.wikimedia.org/wikipedia/commons/1/17/Coat_of_arms_of_Rwanda.svg" alt="Rwanda Coat of Arms">
+      <h3>REPUBLIC OF RWANDA</h3>
+      <h3>EASTERN PROVINCE</h3>
+      <h3>KIREHE DISTRICT</h3>
+      <h3>NASHO HEALTH CENTER</h3>
+      <div class="contact"><b>Email: nashohc0428@gmail.com</b></div>
+      <h1>MEDICAL BIRTH CERTIFICATE</h1>
+    </div>
+
+    <div class="title">MOTHER INFORMATION</div>
+    <div class="grid">
+      <div class="field full big">
+        <span class="label">Mother's Full Name:</span>
+        <input id="motherName" required>
+      </div>
+      <div class="field">
+        <span class="label">Mother's ID:</span>
+        <input id="motherId" required>
+      </div>
+      <div class="field">
+        <span class="label">Mother's Phone:</span>
+        <input id="motherPhone" type="tel" required>
+      </div>
+    </div>
+
+    <div class="title">CHILD INFORMATION</div>
+    <div class="grid">
+      <div class="field full big">
+        <span class="label">Child's Full Name:</span>
+        <input id="childName" required>
+      </div>
+      <div class="field">
+        <span class="label">Sex:</span>
+        <select id="childSex" required>
+          <option value="">Select</option>
+          <option>Male</option>
+          <option>Female</option>
+        </select>
+      </div>
+      <div class="field">
+        <span class="label">Date of Birth:</span>
+        <input id="dob" type="date" required>
+      </div>
+      <div class="field">
+        <span class="label">Time of Birth:</span>
+        <input id="tob" type="time" required>
+      </div>
+      <div class="field">
+        <span class="label">Weight (grams):</span>
+        <input id="weight" type="number" min="0" required>
+      </div>
+      <div class="field">
+        <span class="label">Height (cm):</span>
+        <input id="height" type="number" min="0" step="0.1" required>
+      </div>
+      <div class="field">
+        <span class="label">Nurse:</span>
+        <input id="nurseName" class="readonly" readonly>
+      </div>
+      <div class="field full">
+        <span class="label">Place of Birth:</span>
+        <input value="NASHO HEALTH CENTER" class="readonly" readonly style="font-weight:bold">
+      </div>
+    </div>
+
+    <div class="title">FATHER INFORMATION</div>
+    <div class="grid">
+      <div class="field full big">
+        <span class="label">Father's Full Name:</span>
+        <input id="fatherName" required>
+      </div>
+      <div class="field">
+        <span class="label">Father's ID:</span>
+        <input id="fatherId" required>
+      </div>
+      <div class="field">
+        <span class="label">Father's Phone:</span>
+        <input id="fatherPhone" type="tel" required>
+      </div>
+    </div>
+
+    <div class="title">BIRTH AREA INFORMATION</div>
+    <div class="grid">
+      <div class="field">
+        <span class="label">District:</span>
+        <input value="KIREHE" class="readonly" readonly>
+      </div>
+      <div class="field">
+        <span class="label">Sector:</span>
+        <select id="sector" required>
+          <option value="">Select</option>
+          <option>Gahara</option>
+          <option>Gatore</option>
+          <option>Kigarama</option>
+          <option>Kigina</option>
+          <option>Kirehe</option>
+          <option>Mahama</option>
+          <option>Mpanga</option>
+          <option>Musaza</option>
+          <option>Mushikiri</option>
+          <option>Nasho</option>
+          <option>Nyamugari</option>
+          <option>Nyarubuye</option>
+        </select>
+      </div>
+      <div class="field">
+        <span class="label">Cell:</span>
+        <input id="cell" required>
+      </div>
+      <div class="field">
+        <span class="label">Village:</span>
+        <input id="village" required>
+      </div>
+    </div>
+
+    <div class="title">ADMINISTRATIVE REFERENCE</div>
+    <div class="grid">
+      <div class="field">
+        <span class="label">Application Number:</span>
+        <input id="appNo" class="readonly" readonly placeholder="Pending admin verification">
+      </div>
+      <div class="field">
+        <span class="label">NIN:</span>
+        <input id="nin" class="readonly" readonly placeholder="Pending admin verification">
+      </div>
+      <div class="field full">
+        <span class="label">Auto-Gen Code:</span>
+        <input id="autoGen" class="readonly" readonly placeholder="Pending admin verification">
+      </div>
+    </div>
+
+    <div id="status" class="status pending">
+      PENDING — APPLICATION NUMBER NOT YET PROVIDED
+    </div>
+
+    <div class="sig">
+      <div class="sigbox">
+        <b>TUYISHIME Japhet</b><br>
+        <span style="color:green;font-weight:bold">Head of NASHO Health Center</span>
+        <div class="space"></div>
+      </div>
+    </div>
+
+  </div>
 </div>
 
-<div class="title">MOTHER INFORMATION</div>
-<div class="grid">
-<div class="field full big"><span class="label">Mother's Full Name:</span><input id="motherName" required></div>
-<div class="field"><span class="label">Mother's ID:</span><input id="motherId" required></div>
-<div class="field"><span class="label">Mother's Phone:</span><input id="motherPhone" required></div>
+<!-- PENDING INFORMATION -->
+<div class="pending-screen" id="pendingScreen">
+  <div class="big-icon">⏳</div>
+  <h2>Certificate Pending Administrative Verification</h2>
+  <p>
+    This birth record has been saved successfully, but the certificate
+    cannot be printed or treated as verified until the authorized
+    administrator enters the Application Number and NIN.
+  </p>
+  <button class="btn gray" id="backToHistoryBtn">Back to My Certificates</button>
 </div>
 
-<div class="title">CHILD INFORMATION</div>
-<div class="grid">
-<div class="field full big"><span class="label">Child's Full Name:</span><input id="childName" required></div>
-<div class="field"><span class="label">Sex:</span><select id="childSex" required><option value="">Select</option><option>Male</option><option>Female</option></select></div>
-<div class="field"><span class="label">Date of Birth:</span><input id="dob" type="date" required></div>
-<div class="field"><span class="label">Time of Birth:</span><input id="tob" type="time" required></div>
-<div class="field"><span class="label">Weight (grams):</span><input id="weight" type="number" required></div>
-<div class="field"><span class="label">Height (cm):</span><input id="height" type="number" required></div>
-<div class="field"><span class="label">Nurse:</span><input id="nurseName" readonly></div>
-<div class="field full"><span class="label">Place of Birth:</span><input value="NASHO HEALTH CENTER" readonly style="font-weight:bold"></div>
-</div>
-
-<div class="title">FATHER INFORMATION</div>
-<div class="grid">
-<div class="field full big"><span class="label">Father's Full Name:</span><input id="fatherName" required></div>
-<div class="field"><span class="label">Father's ID:</span><input id="fatherId" required></div>
-<div class="field"><span class="label">Father's Phone:</span><input id="fatherPhone" required></div>
-</div>
-
-<div class="title">BIRTH AREA INFORMATION</div>
-<div class="grid">
-<div class="field"><span class="label">District:</span><input value="KIREHE" readonly></div>
-<div class="field"><span class="label">Sector:</span><select id="sector" required><option value="">Select</option><option>Gahara</option><option>Gatore</option><option>Kigarama</option><option>Kigina</option><option>Kirehe</option><option>Mahama</option><option>Mpanga</option><option>Musaza</option><option>Mushikiri</option><option>Nasho</option><option>Nyamugari</option><option>Nyarubuye</option></select></div>
-<div class="field"><span class="label">Cell:</span><input id="cell" required></div>
-<div class="field"><span class="label">Village:</span><input id="village" required></div>
-</div>
-
-<div class="title">ADMINISTRATIVE REFERENCE</div>
-<div class="grid">
-<div class="field"><span class="label">Application Number:</span><input id="appNo" readonly placeholder="Pending admin verification"></div>
-<div class="field"><span class="label">NIN:</span><input id="nin" readonly placeholder="Pending admin verification"></div>
-<div class="field full"><span class="label">Auto-Gen Code:</span><input id="autoGen" readonly placeholder="Pending admin verification"></div>
-</div>
-<div id="status" class="status pending">PENDING — APPLICATION NUMBER NOT YET PROVIDED</div>
-
-<div class="sig"><div class="sigbox"><b>TUYISHIME Japhet</b><br><span style="color:green;font-weight:bold">Head of NASHO Health Center</span><div class="space"></div></div></div>
-</div></div>
-
+<!-- HISTORY -->
 <div class="history" id="history">
-<h2>My Birth Certificates</h2><div id="historyBody">Loading...</div>
+  <h2>My Birth Certificates</h2>
+  <div id="historyBody" class="empty">Loading...</div>
 </div>
+
+<div id="toast" class="toast"></div>
 
 <script>
-const API_URL="https://script.google.com/macros/s/AKfycbxSTTkZzMhhq-G31VCG_3SVLsU_itk8EZ0g_A-i0ZUKtbSTuHid7sQfQ-SRr0GqIsRo/exec";
-let session=null,currentId=null;
+/* =========================================================
+   NASHO BIRTH CERTIFICATE API
+========================================================= */
+const API_URL =
+"https://script.google.com/macros/s/AKfycbxSTTkZzMhhq-G31VCG_3SVLsU_itk8EZ0g_A-i0ZUKtbSTuHid7sQfQ-SRr0GqIsRo/exec";
 
-function api(action,data={}){
-  return fetch(API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action,...data})})
-  .then(r=>r.json());
+/* =========================================================
+   DOM
+========================================================= */
+const $ = id => document.getElementById(id);
+
+const loginModal = $("loginModal");
+const username = $("username");
+const password = $("password");
+const loginBtn = $("loginBtn");
+const loginMsg = $("loginMsg");
+
+const topBar = $("top");
+const who = $("who");
+const logoutBtn = $("logoutBtn");
+
+const toolbar = $("toolbar");
+const newBtn = $("newBtn");
+const submitBtn = $("submitBtn");
+const printBtn = $("printBtn");
+const historyBtn = $("historyBtn");
+
+const wrap = $("wrap");
+const history = $("history");
+const historyBody = $("historyBody");
+const pendingScreen = $("pendingScreen");
+const backToHistoryBtn = $("backToHistoryBtn");
+const toast = $("toast");
+
+let session = null;
+let currentId = null;
+let currentStatus = "PENDING";
+
+/* =========================================================
+   API
+========================================================= */
+async function api(action, data = {}) {
+  const payload = { action, ...data };
+
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const text = await response.text();
+
+    if (!text) {
+      throw new Error("Empty response from server.");
+    }
+
+    let result;
+    try {
+      result = JSON.parse(text);
+    } catch (err) {
+      console.error("Raw API response:", text);
+      throw new Error("Invalid server response.");
+    }
+
+    return result;
+
+  } catch (error) {
+    console.error("API ERROR:", error);
+    throw error;
+  }
 }
-async function login(){
- const u=username.value.trim(),p=password.value;
- if(!u||!p){loginMsg.textContent="Enter username and password.";return}
- try{
-  const r=await api("nurseLogin",{username:u,password:p});
-  if(r.success){session=r.user;who.textContent=session.name;nurseName.value=session.name;loginModal.classList.add("hidden");top.style.display="flex";toolbar.style.display="flex";wrap.style.display="flex";newCertificate();}
-  else loginMsg.textContent=r.message||"Invalid login.";
- }catch(e){loginMsg.textContent="Server connection error. Check API URL."}
+
+/* =========================================================
+   LOGIN
+========================================================= */
+async function login() {
+  const u = username.value.trim();
+  const p = password.value;
+
+  loginMsg.textContent = "";
+
+  if (!u || !p) {
+    loginMsg.textContent = "Enter username and password.";
+    return;
+  }
+
+  loginBtn.disabled = true;
+  loginBtn.textContent = "CONNECTING...";
+
+  try {
+    const result = await api("nurseLogin", {
+      username: u,
+      password: p
+    });
+
+    if (!result.success) {
+      loginMsg.textContent =
+        result.message || "Invalid username or password.";
+      return;
+    }
+
+    session = result.user;
+
+    localStorage.setItem(
+      "nasho_nurse_session",
+      JSON.stringify(session)
+    );
+
+    openNurseSystem();
+
+  } catch (error) {
+    loginMsg.textContent =
+      "Server connection error. Please check the API deployment.";
+    console.error(error);
+  } finally {
+    loginBtn.disabled = false;
+    loginBtn.textContent = "LOGIN";
+  }
 }
-function logout(){session=null;loginModal.classList.remove("hidden");top.style.display="none";toolbar.style.display="none";wrap.style.display="none";history.classList.remove("show");username.value=password.value="";}
-function fields(){
- return {motherName:motherName.value,motherId:motherId.value,motherPhone:motherPhone.value,childName:childName.value,childSex:childSex.value,dob:dob.value,tob:tob.value,weight:weight.value,height:height.value,nurseName:nurseName.value,fatherName:fatherName.value,fatherId:fatherId.value,fatherPhone:fatherPhone.value,sector:sector.value,cell:cell.value,village:village.value};
+
+function openNurseSystem() {
+  if (!session || !session.token) {
+    loginMsg.textContent = "Invalid login session.";
+    return;
+  }
+
+  who.textContent = session.name || session.username;
+  $("nurseName").value = session.name || "";
+
+  loginModal.classList.add("hidden");
+  topBar.style.display = "flex";
+  toolbar.style.display = "flex";
+
+  newCertificate();
 }
-function validate(){
- for(const [k,v] of Object.entries(fields()))if(!String(v||"").trim()){alert("Please fill all required fields.");document.getElementById(k)?.focus();return false}
- return true;
+
+function logout() {
+  session = null;
+  currentId = null;
+  currentStatus = "PENDING";
+
+  localStorage.removeItem("nasho_nurse_session");
+
+  loginModal.classList.remove("hidden");
+  topBar.style.display = "none";
+  toolbar.style.display = "none";
+  wrap.style.display = "none";
+  history.style.display = "none";
+  pendingScreen.style.display = "none";
+
+  username.value = "";
+  password.value = "";
+  loginMsg.textContent = "";
 }
-function clearForm(){
- ["motherName","motherId","motherPhone","childName","childSex","dob","tob","weight","height","fatherName","fatherId","fatherPhone","sector","cell","village","appNo","nin","autoGen"].forEach(id=>{let e=document.getElementById(id);if(e)e.value=""});
- nurseName.value=session?.name||"";appNo.placeholder="Pending admin verification";nin.placeholder="Pending admin verification";autoGen.placeholder="Pending admin verification";status.className="status pending";status.textContent="PENDING — APPLICATION NUMBER NOT YET PROVIDED";currentId=null;
+
+/* =========================================================
+   FORM
+========================================================= */
+function fields() {
+  return {
+    motherName: $("motherName").value.trim(),
+    motherId: $("motherId").value.trim(),
+    motherPhone: $("motherPhone").value.trim(),
+    childName: $("childName").value.trim(),
+    childSex: $("childSex").value,
+    dob: $("dob").value,
+    tob: $("tob").value,
+    weight: $("weight").value,
+    height: $("height").value,
+    nurseName: $("nurseName").value,
+    fatherName: $("fatherName").value.trim(),
+    fatherId: $("fatherId").value.trim(),
+    fatherPhone: $("fatherPhone").value.trim(),
+    sector: $("sector").value,
+    cell: $("cell").value.trim(),
+    village: $("village").value.trim()
+  };
 }
-function newCertificate(){clearForm();history.style.display="none";wrap.style.display="flex";}
-async function submitRecord(){
- if(!validate())return;
- if(!confirm("Submit this birth record?"))return;
- try{
-  const r=await api("submitBirth",{token:session.token,data:fields()});
-  if(r.success){currentId=r.id;alert("Saved successfully. The certificate will become available after admin verification.");loadMine();}
-  else alert(r.message||"Could not save record.");
- }catch(e){alert("Server error while saving.")}
+
+function validate() {
+  const data = fields();
+
+  const required = [
+    ["motherName","Mother's Full Name"],
+    ["motherId","Mother's ID"],
+    ["motherPhone","Mother's Phone"],
+    ["childName","Child's Full Name"],
+    ["childSex","Child's Sex"],
+    ["dob","Date of Birth"],
+    ["tob","Time of Birth"],
+    ["weight","Weight"],
+    ["height","Height"],
+    ["fatherName","Father's Full Name"],
+    ["fatherId","Father's ID"],
+    ["fatherPhone","Father's Phone"],
+    ["sector","Sector"],
+    ["cell","Cell"],
+    ["village","Village"]
+  ];
+
+  for (const [id,label] of required) {
+    if (!String(data[id] || "").trim()) {
+      alert("Please fill: " + label);
+      $(id).focus();
+      return false;
+    }
+  }
+
+  return true;
 }
-async function loadMine(){
- try{
-  const r=await api("myCertificates",{token:session.token});
-  history.style.display="block";wrap.style.display="none";
-  if(!r.success){historyBody.innerHTML="<p>Could not load records.</p>";return}
-  if(!r.records.length){historyBody.innerHTML="<p>No birth certificates found.</p>";return}
-  historyBody.innerHTML=`<table><tr><th>Child</th><th>Date</th><th>Status</th><th>Action</th></tr>`+
-  r.records.map(x=>`<tr><td>${esc(x.childName)}</td><td>${esc(x.dob)}</td><td><span class="pill ${x.status==="VERIFIED"?"v":"p"}">${x.status}</span></td><td><button class="btn" onclick='viewRecord(${JSON.stringify(x)})'>View</button></td></tr>`).join("")+"</table>";
- }catch(e){alert("Server error.")}
+
+function clearForm() {
+  [
+    "motherName","motherId","motherPhone",
+    "childName","childSex","dob","tob",
+    "weight","height","fatherName","fatherId",
+    "fatherPhone","sector","cell","village",
+    "appNo","nin","autoGen"
+  ].forEach(id => {
+    $(id).value = "";
+  });
+
+  $("nurseName").value = session ? session.name : "";
+
+  $("appNo").placeholder = "Pending admin verification";
+  $("nin").placeholder = "Pending admin verification";
+  $("autoGen").placeholder = "Pending admin verification";
+
+  currentId = null;
+  currentStatus = "PENDING";
+
+  setStatus("PENDING");
+  printBtn.classList.add("hidden");
 }
-function viewRecord(x){
- currentId=x.id;for(const k of Object.keys(fields()))if(document.getElementById(k))document.getElementById(k).value=x[k]||"";
- appNo.value=x.applicationNumber||"";nin.value=x.nin||"";autoGen.value=x.autoGen||"";nurseName.value=x.nurseName||session.name;
- status.className="status "+(x.status==="VERIFIED"?"verified":"pending");status.textContent=x.status==="VERIFIED"?"VERIFIED — CERTIFICATE AVAILABLE":"PENDING — APPLICATION NUMBER NOT YET PROVIDED";
- history.style.display="none";wrap.style.display="flex";
+
+function newCertificate() {
+  clearForm();
+  history.style.display = "none";
+  pendingScreen.style.display = "none";
+  wrap.style.display = "flex";
 }
-function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
+
+function setStatus(status) {
+  currentStatus = status || "PENDING";
+
+  if (currentStatus === "VERIFIED") {
+    $("status").className = "status verified";
+    $("status").textContent =
+      "VERIFIED — CERTIFICATE AVAILABLE";
+    printBtn.classList.remove("hidden");
+  } else {
+    $("status").className = "status pending";
+    $("status").textContent =
+      "PENDING — APPLICATION NUMBER NOT YET PROVIDED";
+    printBtn.classList.add("hidden");
+  }
+}
+
+/* =========================================================
+   SUBMIT
+========================================================= */
+async function submitRecord() {
+  if (!session || !session.token) {
+    alert("Please login again.");
+    return;
+  }
+
+  if (!validate()) return;
+
+  if (!confirm("Submit this birth record?")) return;
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = "SAVING...";
+
+  try {
+    const result = await api("submitBirth", {
+      token: session.token,
+      data: fields()
+    });
+
+    if (result.success) {
+      currentId = result.id;
+
+      showToast(
+        "Birth record saved successfully. The administrator must verify it before the certificate becomes available."
+      );
+
+      await loadMine();
+    } else {
+      alert(result.message || "Could not save record.");
+    }
+
+  } catch (error) {
+    alert("Server error while saving the birth record.");
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Submit & Save";
+  }
+}
+
+/* =========================================================
+   HISTORY
+========================================================= */
+async function loadMine() {
+  if (!session || !session.token) {
+    alert("Please login again.");
+    return;
+  }
+
+  history.style.display = "block";
+  wrap.style.display = "none";
+  pendingScreen.style.display = "none";
+  historyBody.innerHTML = '<div class="empty">Loading...</div>';
+
+  try {
+    const result = await api("myCertificates", {
+      token: session.token
+    });
+
+    if (!result.success) {
+      historyBody.innerHTML =
+        '<div class="empty">' +
+        esc(result.message || "Could not load records.") +
+        '</div>';
+      return;
+    }
+
+    if (!result.records || !result.records.length) {
+      historyBody.innerHTML =
+        '<div class="empty">No birth certificates found.</div>';
+      return;
+    }
+
+    historyBody.innerHTML =
+      '<div class="table-wrap">' +
+      '<table>' +
+      '<thead>' +
+      '<tr>' +
+      '<th>Child</th>' +
+      '<th>Date of Birth</th>' +
+      '<th>Mother Phone</th>' +
+      '<th>Status</th>' +
+      '<th>Action</th>' +
+      '</tr>' +
+      '</thead><tbody>' +
+      result.records.map(x => {
+        const verified = x.status === "VERIFIED";
+
+        return `
+          <tr>
+            <td><b>${esc(x.childName)}</b></td>
+            <td>${esc(x.dob)}</td>
+            <td>${esc(x.motherPhone)}</td>
+            <td>
+              <span class="pill ${verified ? "v" : "p"}">
+                ${esc(x.status)}
+              </span>
+            </td>
+            <td>
+              <button class="btn ${verified ? "green" : "gray"}"
+                onclick='viewRecord(${JSON.stringify(x).replace(/'/g,"&#39;")})'>
+                ${verified ? "VIEW CERTIFICATE" : "VIEW STATUS"}
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join("") +
+      '</tbody></table></div>';
+
+  } catch (error) {
+    historyBody.innerHTML =
+      '<div class="empty">Server error while loading your records.</div>';
+  }
+}
+
+/* =========================================================
+   VIEW RECORD
+========================================================= */
+function viewRecord(record) {
+  currentId = record.id;
+  currentStatus = record.status || "PENDING";
+
+  const map = {
+    motherName:"motherName",
+    motherId:"motherId",
+    motherPhone:"motherPhone",
+    childName:"childName",
+    childSex:"childSex",
+    dob:"dob",
+    tob:"tob",
+    weight:"weight",
+    height:"height",
+    nurseName:"nurseName",
+    fatherName:"fatherName",
+    fatherId:"fatherId",
+    fatherPhone:"fatherPhone",
+    sector:"sector",
+    cell:"cell",
+    village:"village"
+  };
+
+  Object.keys(map).forEach(key => {
+    if ($(map[key])) {
+      $(map[key]).value = record[key] ?? "";
+    }
+  });
+
+  $("appNo").value = record.applicationNumber || "";
+  $("nin").value = record.nin || "";
+  $("autoGen").value = record.autoGen || "";
+
+  setStatus(record.status);
+
+  history.style.display = "none";
+
+  if (record.status === "VERIFIED") {
+    pendingScreen.style.display = "none";
+    wrap.style.display = "flex";
+  } else {
+    wrap.style.display = "none";
+    pendingScreen.style.display = "block";
+  }
+}
+
+/* =========================================================
+   PRINT
+========================================================= */
+function printCertificate() {
+  if (currentStatus !== "VERIFIED") {
+    alert(
+      "This certificate is still pending administrative verification."
+    );
+    return;
+  }
+
+  window.print();
+}
+
+/* =========================================================
+   HELPERS
+========================================================= */
+function esc(value) {
+  return String(value ?? "").replace(
+    /[&<>"']/g,
+    m => ({
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#39;"
+    }[m])
+  );
+}
+
+let toastTimer = null;
+
+function showToast(message) {
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 5000);
+}
+
+/* =========================================================
+   EVENTS
+========================================================= */
+loginBtn.addEventListener("click", login);
+
+password.addEventListener("keydown", e => {
+  if (e.key === "Enter") login();
+});
+
+username.addEventListener("keydown", e => {
+  if (e.key === "Enter") password.focus();
+});
+
+logoutBtn.addEventListener("click", logout);
+newBtn.addEventListener("click", newCertificate);
+submitBtn.addEventListener("click", submitRecord);
+printBtn.addEventListener("click", printCertificate);
+historyBtn.addEventListener("click", loadMine);
+backToHistoryBtn.addEventListener("click", loadMine);
+
+/* =========================================================
+   RESTORE LOGIN
+========================================================= */
+(function restoreSession() {
+  try {
+    const saved = localStorage.getItem("nasho_nurse_session");
+
+    if (!saved) return;
+
+    const parsed = JSON.parse(saved);
+
+    if (
+      parsed &&
+      parsed.username &&
+      parsed.name &&
+      parsed.token
+    ) {
+      session = parsed;
+      openNurseSystem();
+    }
+  } catch (error) {
+    localStorage.removeItem("nasho_nurse_session");
+  }
+})();
 </script>
-</body></html>
+
+</body>
+</html>
