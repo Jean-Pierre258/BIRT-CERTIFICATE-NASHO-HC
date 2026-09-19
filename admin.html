@@ -10,7 +10,7 @@
 <div class="panel" id="editPanel" style="margin-top:20px;display:none"><h2>Administrative Verification</h2><p id="recordInfo"></p><div class="grid"><div><label>Application Number</label><input id="applicationNumber"></div><div><label>NIN</label><input id="nin"></div><div><label>Auto-Gen Code</label><input id="autoGen" readonly></div></div><br><button class="btn green" onclick="verify()">SAVE & VERIFY</button></div>
 </div></div>
 <script>
-const API_URL="PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";let token="",selected=null;
+const API_URL="https://script.google.com/macros/s/AKfycbxSTTkZzMhhq-G31VCG_3SVLsU_itk8EZ0g_A-i0ZUKtbSTuHid7sQfQ-SRr0GqIsRo/exec";let token="",selected=null;
 function api(action,data={}){return fetch(API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action,...data})}).then(r=>r.json())}
 async function adminLogin(){try{let r=await api("adminLogin",{username:au.value,password:ap.value});if(r.success){token=r.token;login.classList.add("hidden");app.classList.remove("hidden");loadStats()}else msg.textContent=r.message||"Invalid login"}catch(e){msg.textContent="Server connection error"}}
 async function loadStats(){let r=await api("stats",{token});if(r.success){pending.textContent=r.pending;verified.textContent=r.verified;total.textContent=r.total}}
