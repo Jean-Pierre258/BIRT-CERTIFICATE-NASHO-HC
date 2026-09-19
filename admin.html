@@ -1,20 +1,993 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NASHO | Birth Certificate Admin</title>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>NASHO | Birth Certificate Admin</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;background:#f1f5f9;font-family:Arial;color:#172033}.head{background:#003b70;color:#fff;padding:15px 22px;display:flex;justify-content:space-between}.wrap{max-width:1200px;margin:20px auto;padding:0 15px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.card,.panel{background:#fff;border-radius:12px;padding:20px;box-shadow:0 3px 14px #0001}.num{font-size:30px;font-weight:800}.search{display:flex;gap:10px;margin:20px 0}.search input{flex:1;padding:13px;border:1px solid #ccd4df;border-radius:8px}.btn{border:0;padding:12px 17px;border-radius:8px;background:#003b70;color:#fff;font-weight:bold;cursor:pointer}.green{background:#16833b}.red{background:#b42318}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid input{width:100%;padding:11px;border:1px solid #ccd4df;border-radius:7px}.result{margin-top:15px}.table{width:100%;border-collapse:collapse}.table th,.table td{padding:9px;border-bottom:1px solid #ddd;text-align:left;font-size:13px}.login{position:fixed;inset:0;background:#fff;display:flex;align-items:center;justify-content:center}.loginbox{width:min(400px,92%);padding:30px;background:#fff;box-shadow:0 10px 30px #0002;border-radius:14px}.loginbox input{width:100%;padding:13px;margin:7px 0;border:1px solid #ccc;border-radius:7px}.hidden{display:none!important}@media(max-width:700px){.cards,.grid{grid-template-columns:1fr}.search{flex-direction:column}}
-</style></head><body>
-<div id="login" class="login"><div class="loginbox"><h2>NASHO Birth Certificate Admin</h2><input id="au" placeholder="Admin username"><input id="ap" type="password" placeholder="Admin password"><button class="btn" style="width:100%" onclick="adminLogin()">LOGIN</button><p id="msg"></p></div></div>
-<div id="app" class="hidden"><div class="head"><b>NASHO BIRTH CERTIFICATE ADMIN</b><button class="btn red" onclick="location.reload()">Logout</button></div>
-<div class="wrap"><div class="cards"><div class="card">Pending<div class="num" id="pending">0</div></div><div class="card">Verified<div class="num" id="verified">0</div></div><div class="card">Total<div class="num" id="total">0</div></div></div>
-<div class="panel" style="margin-top:20px"><h2>Find Certificate</h2><div class="search"><input id="search" placeholder="Application Number or Mother's Phone"><button class="btn" onclick="searchRecord()">SEARCH</button></div><div id="results"></div></div>
-<div class="panel" id="editPanel" style="margin-top:20px;display:none"><h2>Administrative Verification</h2><p id="recordInfo"></p><div class="grid"><div><label>Application Number</label><input id="applicationNumber"></div><div><label>NIN</label><input id="nin"></div><div><label>Auto-Gen Code</label><input id="autoGen" readonly></div></div><br><button class="btn green" onclick="verify()">SAVE & VERIFY</button></div>
-</div></div>
+*{
+  box-sizing:border-box
+}
+
+body{
+  margin:0;
+  background:#f1f5f9;
+  font-family:Arial,sans-serif;
+  color:#172033
+}
+
+.head{
+  background:#003b70;
+  color:#fff;
+  padding:15px 22px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px
+}
+
+.wrap{
+  max-width:1400px;
+  margin:20px auto;
+  padding:0 15px
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px
+}
+
+.card,
+.panel{
+  background:#fff;
+  border-radius:12px;
+  padding:20px;
+  box-shadow:0 3px 14px #0001
+}
+
+.card{
+  border-left:5px solid #003b70
+}
+
+.num{
+  font-size:30px;
+  font-weight:800;
+  margin-top:8px
+}
+
+.search{
+  display:flex;
+  gap:10px;
+  margin:20px 0
+}
+
+.search input{
+  flex:1;
+  padding:13px;
+  border:1px solid #ccd4df;
+  border-radius:8px;
+  font-size:15px
+}
+
+.btn{
+  border:0;
+  padding:12px 17px;
+  border-radius:8px;
+  background:#003b70;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer
+}
+
+.btn:hover{
+  opacity:.9
+}
+
+.green{
+  background:#16833b
+}
+
+.red{
+  background:#b42318
+}
+
+.gray{
+  background:#64748b
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:12px
+}
+
+.grid input{
+  width:100%;
+  padding:11px;
+  border:1px solid #ccd4df;
+  border-radius:7px;
+  margin-top:5px
+}
+
+.result{
+  margin-top:15px
+}
+
+.table-wrap{
+  overflow-x:auto
+}
+
+.table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:1000px
+}
+
+.table th,
+.table td{
+  padding:10px;
+  border-bottom:1px solid #ddd;
+  text-align:left;
+  font-size:13px
+}
+
+.table th{
+  background:#f8fafc;
+  color:#334155
+}
+
+.table tr:hover{
+  background:#f8fafc
+}
+
+.status{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:bold
+}
+
+.pending{
+  background:#fff7ed;
+  color:#c2410c
+}
+
+.verified{
+  background:#dcfce7;
+  color:#166534
+}
+
+.login{
+  position:fixed;
+  inset:0;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:100
+}
+
+.loginbox{
+  width:min(400px,92%);
+  padding:30px;
+  background:#fff;
+  box-shadow:0 10px 30px #0002;
+  border-radius:14px
+}
+
+.loginbox h2{
+  margin-top:0;
+  color:#003b70
+}
+
+.loginbox input{
+  width:100%;
+  padding:13px;
+  margin:7px 0;
+  border:1px solid #ccc;
+  border-radius:7px
+}
+
+.hidden{
+  display:none!important
+}
+
+.message{
+  padding:12px;
+  border-radius:8px;
+  margin-top:10px;
+  background:#fef2f2;
+  color:#b42318
+}
+
+.empty{
+  text-align:center;
+  padding:30px;
+  color:#64748b
+}
+
+.small{
+  font-size:12px;
+  color:#64748b
+}
+
+@media(max-width:800px){
+
+  .cards{
+    grid-template-columns:1fr
+  }
+
+  .grid{
+    grid-template-columns:1fr
+  }
+
+  .search{
+    flex-direction:column
+  }
+
+  .head{
+    flex-direction:column;
+    align-items:flex-start
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div id="login" class="login">
+
+  <div class="loginbox">
+
+    <h2>NASHO Birth Certificate Admin</h2>
+
+    <p class="small">
+      Administrator login
+    </p>
+
+    <input
+      id="au"
+      placeholder="Admin username"
+      autocomplete="username"
+    >
+
+    <input
+      id="ap"
+      type="password"
+      placeholder="Admin password"
+      autocomplete="current-password"
+    >
+
+    <button
+      class="btn"
+      style="width:100%"
+      onclick="adminLogin()"
+    >
+      LOGIN
+    </button>
+
+    <p id="msg"></p>
+
+  </div>
+
+</div>
+
+
+<!-- APPLICATION -->
+<div id="app" class="hidden">
+
+  <div class="head">
+
+    <b>NASHO BIRTH CERTIFICATE ADMIN</b>
+
+    <button
+      class="btn red"
+      onclick="logout()"
+    >
+      Logout
+    </button>
+
+  </div>
+
+
+  <div class="wrap">
+
+    <!-- STATISTICS -->
+    <div class="cards">
+
+      <div class="card">
+        Pending
+        <div
+          class="num"
+          id="pending"
+        >
+          0
+        </div>
+      </div>
+
+      <div class="card">
+        Verified
+        <div
+          class="num"
+          id="verified"
+        >
+          0
+        </div>
+      </div>
+
+      <div class="card">
+        Total
+        <div
+          class="num"
+          id="total"
+        >
+          0
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- SEARCH -->
+    <div
+      class="panel"
+      style="margin-top:20px"
+    >
+
+      <h2>Find Certificate</h2>
+
+      <div class="search">
+
+        <input
+          id="search"
+          placeholder="Application Number, Mother's Phone, Child Name or Mother Name"
+          onkeydown="if(event.key==='Enter')searchRecord()"
+        >
+
+        <button
+          class="btn"
+          onclick="searchRecord()"
+        >
+          SEARCH
+        </button>
+
+        <button
+          class="btn gray"
+          onclick="loadAllRecords()"
+        >
+          SHOW ALL
+        </button>
+
+      </div>
+
+      <div id="results"></div>
+
+    </div>
+
+
+    <!-- EDIT / VERIFY -->
+    <div
+      class="panel"
+      id="editPanel"
+      style="margin-top:20px;display:none"
+    >
+
+      <h2>Administrative Verification</h2>
+
+      <p id="recordInfo"></p>
+
+      <div class="grid">
+
+        <div>
+          <label>Application Number</label>
+
+          <input
+            id="applicationNumber"
+            placeholder="Application Number"
+          >
+        </div>
+
+        <div>
+          <label>NIN</label>
+
+          <input
+            id="nin"
+            placeholder="NIN"
+          >
+        </div>
+
+        <div>
+          <label>Auto-Gen Code</label>
+
+          <input
+            id="autoGen"
+            readonly
+          >
+        </div>
+
+      </div>
+
+      <br>
+
+      <button
+        class="btn green"
+        onclick="verify()"
+      >
+        SAVE & VERIFY
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
 <script>
-const API_URL="https://script.google.com/macros/s/AKfycbxSTTkZzMhhq-G31VCG_3SVLsU_itk8EZ0g_A-i0ZUKtbSTuHid7sQfQ-SRr0GqIsRo/exec";let token="",selected=null;
-function api(action,data={}){return fetch(API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action,...data})}).then(r=>r.json())}
-async function adminLogin(){try{let r=await api("adminLogin",{username:au.value,password:ap.value});if(r.success){token=r.token;login.classList.add("hidden");app.classList.remove("hidden");loadStats()}else msg.textContent=r.message||"Invalid login"}catch(e){msg.textContent="Server connection error"}}
-async function loadStats(){let r=await api("stats",{token});if(r.success){pending.textContent=r.pending;verified.textContent=r.verified;total.textContent=r.total}}
-async function searchRecord(){let q=search.value.trim();if(!q)return;let r=await api("adminSearch",{token,query:q});if(!r.success){results.innerHTML="<p>No record found.</p>";editPanel.style.display="none";return}selected=r.record;results.innerHTML=`<table class="table"><tr><th>Child</th><th>Mother</th><th>Mother Phone</th><th>Status</th></tr><tr><td>${e(selected.childName)}</td><td>${e(selected.motherName)}</td><td>${e(selected.motherPhone)}</td><td>${e(selected.status)}</td></tr></table>`;recordInfo.textContent=`Child: ${selected.childName} | Mother: ${selected.motherName} | DOB: ${selected.dob}`;applicationNumber.value=selected.applicationNumber||"";nin.value=selected.nin||"";autoGen.value=selected.autoGen||"";editPanel.style.display="block"}
-async function verify(){if(!selected)return;if(!applicationNumber.value.trim()||!nin.value.trim()){alert("Application Number and NIN are required.");return}let r=await api("verifyBirth",{token,id:selected.id,applicationNumber:applicationNumber.value.trim(),nin:nin.value.trim()});if(r.success){alert("Certificate verified successfully.");autoGen.value=r.autoGen;loadStats();searchRecord()}else alert(r.message||"Could not verify")}
-function e(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
-</script></body></html>
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbxSTTkZzMhhq-G31VCG_3SVLsU_itk8EZ0g_A-i0ZUKtbSTuHid7sQfQ-SRr0GqIsRo/exec";
+
+let token = "";
+let selected = null;
+let allRecords = [];
+
+
+/* =====================================================
+   API
+===================================================== */
+
+async function api(action,data={}){
+
+  const payload = {
+    action,
+    ...data
+  };
+
+  const response = await fetch(API_URL,{
+    method:"POST",
+    body:new URLSearchParams({
+      payload:JSON.stringify(payload)
+    })
+  });
+
+  const text = await response.text();
+
+  try{
+
+    return JSON.parse(text);
+
+  }catch(error){
+
+    console.error(text);
+
+    return {
+      success:false,
+      message:"Invalid server response."
+    };
+
+  }
+}
+
+
+/* =====================================================
+   ADMIN LOGIN
+===================================================== */
+
+async function adminLogin(){
+
+  msg.textContent = "Connecting...";
+
+  try{
+
+    const r = await api(
+      "adminLogin",
+      {
+        username:au.value.trim(),
+        password:ap.value
+      }
+    );
+
+    console.log("LOGIN RESPONSE:",r);
+
+    if(r.success){
+
+      token = r.token;
+
+      sessionStorage.setItem(
+        "nasho_admin_token",
+        token
+      );
+
+      login.classList.add("hidden");
+
+      app.classList.remove("hidden");
+
+      msg.textContent = "";
+
+      await loadStats();
+
+      await loadAllRecords();
+
+    }else{
+
+      msg.textContent =
+        r.message || "Invalid login";
+
+    }
+
+  }catch(error){
+
+    console.error(error);
+
+    msg.textContent =
+      "Server connection error.";
+
+  }
+}
+
+
+/* =====================================================
+   LOAD STATS
+===================================================== */
+
+async function loadStats(){
+
+  const r = await api(
+    "stats",
+    {
+      token
+    }
+  );
+
+  console.log("STATS:",r);
+
+  if(r.success){
+
+    pending.textContent =
+      r.pending ?? 0;
+
+    verified.textContent =
+      r.verified ?? 0;
+
+    total.textContent =
+      r.total ?? 0;
+
+  }
+}
+
+
+/* =====================================================
+   LOAD ALL RECORDS
+===================================================== */
+
+async function loadAllRecords(){
+
+  results.innerHTML =
+    `<div class="empty">Loading records...</div>`;
+
+  const r = await api(
+    "adminAll",
+    {
+      token
+    }
+  );
+
+  console.log("ALL RECORDS:",r);
+
+  if(!r.success){
+
+    results.innerHTML =
+      `<div class="message">${e(r.message)}</div>`;
+
+    return;
+  }
+
+  allRecords =
+    Array.isArray(r.records)
+      ? r.records
+      : [];
+
+  renderRecords(allRecords);
+}
+
+
+/* =====================================================
+   RENDER RECORDS
+===================================================== */
+
+function renderRecords(records){
+
+  if(!records.length){
+
+    results.innerHTML = `
+      <div class="empty">
+        No birth certificate records found.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  let html = `
+
+    <div style="margin-bottom:10px">
+      <b>${records.length}</b>
+      record(s) found.
+    </div>
+
+    <div class="table-wrap">
+
+    <table class="table">
+
+      <thead>
+
+        <tr>
+
+          <th>#</th>
+
+          <th>Child</th>
+
+          <th>Mother</th>
+
+          <th>Mother Phone</th>
+
+          <th>DOB</th>
+
+          <th>Sex</th>
+
+          <th>Status</th>
+
+          <th>Application No.</th>
+
+          <th>NIN</th>
+
+          <th>Auto-Gen</th>
+
+          <th>Action</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+  `;
+
+
+  records.forEach((record,index)=>{
+
+    const status =
+      String(record.status || "").toUpperCase();
+
+    const statusClass =
+      status === "VERIFIED"
+        ? "verified"
+        : "pending";
+
+    html += `
+
+      <tr>
+
+        <td>${index+1}</td>
+
+        <td>${e(record.childName)}</td>
+
+        <td>${e(record.motherName)}</td>
+
+        <td>${e(record.motherPhone)}</td>
+
+        <td>${e(record.dob)}</td>
+
+        <td>${e(record.sex)}</td>
+
+        <td>
+
+          <span class="status ${statusClass}">
+            ${e(status || "PENDING")}
+          </span>
+
+        </td>
+
+        <td>${e(record.applicationNumber)}</td>
+
+        <td>${e(record.nin)}</td>
+
+        <td>${e(record.autoGen)}</td>
+
+        <td>
+
+          <button
+            class="btn"
+            style="padding:7px 10px"
+            onclick='selectRecord(${JSON.stringify(record).replace(/'/g,"&#39;")})'
+          >
+            ${status === "VERIFIED" ? "VIEW" : "VERIFY"}
+          </button>
+
+        </td>
+
+      </tr>
+
+    `;
+
+  });
+
+
+  html += `
+
+      </tbody>
+
+    </table>
+
+    </div>
+  `;
+
+  results.innerHTML = html;
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+async function searchRecord(){
+
+  const q =
+    search.value.trim();
+
+  if(!q){
+
+    loadAllRecords();
+
+    return;
+  }
+
+  results.innerHTML =
+    `<div class="empty">Searching...</div>`;
+
+  const r = await api(
+    "adminSearch",
+    {
+      token,
+      query:q
+    }
+  );
+
+  console.log("SEARCH:",r);
+
+  if(!r.success){
+
+    results.innerHTML =
+      `<div class="message">
+        ${e(r.message || "No record found.")}
+      </div>`;
+
+    editPanel.style.display =
+      "none";
+
+    return;
+  }
+
+  if(r.records && Array.isArray(r.records)){
+
+    renderRecords(r.records);
+
+  }else if(r.record){
+
+    renderRecords([r.record]);
+
+  }else{
+
+    results.innerHTML =
+      `<div class="empty">No record found.</div>`;
+
+  }
+}
+
+
+/* =====================================================
+   SELECT RECORD
+===================================================== */
+
+function selectRecord(record){
+
+  selected = record;
+
+  recordInfo.innerHTML = `
+    <b>Child:</b> ${e(record.childName)}
+    &nbsp; | &nbsp;
+
+    <b>Mother:</b> ${e(record.motherName)}
+    &nbsp; | &nbsp;
+
+    <b>DOB:</b> ${e(record.dob)}
+    <br><br>
+
+    <b>Phone:</b> ${e(record.motherPhone)}
+    &nbsp; | &nbsp;
+
+    <b>Status:</b> ${e(record.status)}
+  `;
+
+  applicationNumber.value =
+    record.applicationNumber || "";
+
+  nin.value =
+    record.nin || "";
+
+  autoGen.value =
+    record.autoGen || "";
+
+  editPanel.style.display =
+    "block";
+
+  window.scrollTo({
+    top:editPanel.offsetTop - 20,
+    behavior:"smooth"
+  });
+}
+
+
+/* =====================================================
+   VERIFY
+===================================================== */
+
+async function verify(){
+
+  if(!selected){
+
+    alert("Please select a record first.");
+
+    return;
+  }
+
+  const application =
+    applicationNumber.value.trim();
+
+  const ninValue =
+    nin.value.trim();
+
+  if(!application){
+
+    alert(
+      "Application Number is required."
+    );
+
+    return;
+  }
+
+  if(!ninValue){
+
+    alert(
+      "NIN is required."
+    );
+
+    return;
+  }
+
+
+  const r = await api(
+    "verifyBirth",
+    {
+      token,
+
+      id:selected.id,
+
+      applicationNumber:
+        application,
+
+      nin:ninValue
+    }
+  );
+
+
+  if(r.success){
+
+    alert(
+      "Certificate verified successfully."
+    );
+
+    autoGen.value =
+      r.autoGen || "";
+
+    await loadStats();
+
+    await loadAllRecords();
+
+    editPanel.style.display =
+      "none";
+
+    selected = null;
+
+  }else{
+
+    alert(
+      r.message ||
+      "Could not verify certificate."
+    );
+
+  }
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+function logout(){
+
+  token = "";
+
+  sessionStorage.removeItem(
+    "nasho_admin_token"
+  );
+
+  location.reload();
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function e(s){
+
+  return String(s ?? "")
+    .replace(
+      /[&<>"']/g,
+      m => ({
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#39;"
+      }[m])
+    );
+
+}
+
+
+/* =====================================================
+   AUTO LOGIN FROM SESSION
+===================================================== */
+
+window.addEventListener(
+  "DOMContentLoaded",
+  async()=>{
+
+    const saved =
+      sessionStorage.getItem(
+        "nasho_admin_token"
+      );
+
+    if(saved){
+
+      token = saved;
+
+      login.classList.add(
+        "hidden"
+      );
+
+      app.classList.remove(
+        "hidden"
+      );
+
+      await loadStats();
+
+      await loadAllRecords();
+
+    }
+
+  }
+);
+
+</script>
+
+</body>
+</html>
