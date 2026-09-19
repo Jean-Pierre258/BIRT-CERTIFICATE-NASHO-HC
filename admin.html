@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -101,7 +100,7 @@ body{
 
 .grid{
   display:grid;
-  grid-template-columns:1fr 1fr 1fr;
+  grid-template-columns:1fr 1fr;
   gap:12px
 }
 
@@ -124,7 +123,7 @@ body{
 .table{
   width:100%;
   border-collapse:collapse;
-  min-width:1000px
+  min-width:900px
 }
 
 .table th,
@@ -240,12 +239,17 @@ body{
 
 <body>
 
-<!-- LOGIN -->
+<!-- =====================================================
+     LOGIN
+===================================================== -->
+
 <div id="login" class="login">
 
   <div class="loginbox">
 
-    <h2>NASHO Birth Certificate Admin</h2>
+    <h2>
+      NASHO Birth Certificate Admin
+    </h2>
 
     <p class="small">
       Administrator login
@@ -279,12 +283,17 @@ body{
 </div>
 
 
-<!-- APPLICATION -->
+<!-- =====================================================
+     APPLICATION
+===================================================== -->
+
 <div id="app" class="hidden">
 
   <div class="head">
 
-    <b>NASHO BIRTH CERTIFICATE ADMIN</b>
+    <b>
+      NASHO BIRTH CERTIFICATE ADMIN
+    </b>
 
     <button
       class="btn red"
@@ -298,49 +307,68 @@ body{
 
   <div class="wrap">
 
-    <!-- STATISTICS -->
+    <!-- =================================================
+         STATISTICS
+    ================================================== -->
+
     <div class="cards">
 
       <div class="card">
+
         Pending
+
         <div
           class="num"
           id="pending"
         >
           0
         </div>
+
       </div>
 
+
       <div class="card">
+
         Verified
+
         <div
           class="num"
           id="verified"
         >
           0
         </div>
+
       </div>
 
+
       <div class="card">
+
         Total
+
         <div
           class="num"
           id="total"
         >
           0
         </div>
+
       </div>
 
     </div>
 
 
-    <!-- SEARCH -->
+    <!-- =================================================
+         SEARCH
+    ================================================== -->
+
     <div
       class="panel"
       style="margin-top:20px"
     >
 
-      <h2>Find Certificate</h2>
+      <h2>
+        Find Certificate
+      </h2>
 
       <div class="search">
 
@@ -371,44 +399,49 @@ body{
     </div>
 
 
-    <!-- EDIT / VERIFY -->
+    <!-- =================================================
+         EDIT / VERIFY
+    ================================================== -->
+
     <div
       class="panel"
       id="editPanel"
       style="margin-top:20px;display:none"
     >
 
-      <h2>Administrative Verification</h2>
+      <h2>
+        Administrative Verification
+      </h2>
 
       <p id="recordInfo"></p>
 
       <div class="grid">
 
         <div>
-          <label>Application Number</label>
+
+          <label>
+            Application Number
+          </label>
 
           <input
             id="applicationNumber"
             placeholder="Application Number"
           >
+
         </div>
 
+
         <div>
-          <label>NIN</label>
+
+          <label>
+            NIN
+          </label>
 
           <input
             id="nin"
             placeholder="NIN"
           >
-        </div>
 
-        <div>
-          <label>Auto-Gen Code</label>
-
-          <input
-            id="autoGen"
-            readonly
-          >
         </div>
 
       </div>
@@ -431,48 +464,92 @@ body{
 
 <script>
 
-const API_URL =
-"https://script.google.com/macros/s/AKfycbxSTTkZzMhhq-G31VCG_3SVLsU_itk8EZ0g_A-i0ZUKtbSTuHid7sQfQ-SRr0GqIsRo/exec";
-
-let token = "";
-let selected = null;
-let allRecords = [];
-
-
 /* =====================================================
    API
 ===================================================== */
 
-async function api(action,data={}){
+const API_URL =
+"https://script.google.com/macros/s/AKfycbxSTTkZzMhhq-G31VCG_3SVLsU_itk8EZ0g_A-i0ZUKtbSTuHid7sQfQ-SRr0GqIsRo/exec";
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+let token = "";
+
+let selected = null;
+
+let allRecords = [];
+
+
+/* =====================================================
+   API FUNCTION
+===================================================== */
+
+async function api(
+  action,
+  data={}
+){
 
   const payload = {
     action,
     ...data
   };
 
-  const response = await fetch(API_URL,{
-    method:"POST",
-    body:new URLSearchParams({
-      payload:JSON.stringify(payload)
-    })
-  });
-
-  const text = await response.text();
-
   try{
 
-    return JSON.parse(text);
+    const response =
+      await fetch(
+        API_URL,
+        {
+          method:"POST",
+
+          body:
+            new URLSearchParams({
+              payload:
+                JSON.stringify(payload)
+            })
+        }
+      );
+
+    const text =
+      await response.text();
+
+    try{
+
+      return JSON.parse(text);
+
+    }catch(error){
+
+      console.error(
+        "RAW SERVER RESPONSE:",
+        text
+      );
+
+      return {
+        success:false,
+        message:
+          "Invalid server response."
+      };
+
+    }
 
   }catch(error){
 
-    console.error(text);
+    console.error(
+      "API ERROR:",
+      error
+    );
 
     return {
       success:false,
-      message:"Invalid server response."
+      message:
+        "Server connection error."
     };
 
   }
+
 }
 
 
@@ -482,34 +559,48 @@ async function api(action,data={}){
 
 async function adminLogin(){
 
-  msg.textContent = "Connecting...";
+  msg.textContent =
+    "Connecting...";
 
   try{
 
-    const r = await api(
-      "adminLogin",
-      {
-        username:au.value.trim(),
-        password:ap.value
-      }
-    );
+    const r =
+      await api(
+        "adminLogin",
+        {
+          username:
+            au.value.trim(),
 
-    console.log("LOGIN RESPONSE:",r);
+          password:
+            ap.value
+        }
+      );
+
+    console.log(
+      "LOGIN RESPONSE:",
+      r
+    );
 
     if(r.success){
 
-      token = r.token;
+      token =
+        r.token;
 
       sessionStorage.setItem(
         "nasho_admin_token",
         token
       );
 
-      login.classList.add("hidden");
+      login.classList.add(
+        "hidden"
+      );
 
-      app.classList.remove("hidden");
+      app.classList.remove(
+        "hidden"
+      );
 
-      msg.textContent = "";
+      msg.textContent =
+        "";
 
       await loadStats();
 
@@ -518,35 +609,43 @@ async function adminLogin(){
     }else{
 
       msg.textContent =
-        r.message || "Invalid login";
+        r.message ||
+        "Invalid login";
 
     }
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      error
+    );
 
     msg.textContent =
       "Server connection error.";
 
   }
+
 }
 
 
 /* =====================================================
-   LOAD STATS
+   LOAD STATISTICS
 ===================================================== */
 
 async function loadStats(){
 
-  const r = await api(
-    "stats",
-    {
-      token
-    }
-  );
+  const r =
+    await api(
+      "stats",
+      {
+        token
+      }
+    );
 
-  console.log("STATS:",r);
+  console.log(
+    "STATS:",
+    r
+  );
 
   if(r.success){
 
@@ -560,6 +659,7 @@ async function loadStats(){
       r.total ?? 0;
 
   }
+
 }
 
 
@@ -570,21 +670,29 @@ async function loadStats(){
 async function loadAllRecords(){
 
   results.innerHTML =
-    `<div class="empty">Loading records...</div>`;
+    `<div class="empty">
+      Loading records...
+    </div>`;
 
-  const r = await api(
-    "adminAll",
-    {
-      token
-    }
+  const r =
+    await api(
+      "adminAll",
+      {
+        token
+      }
+    );
+
+  console.log(
+    "ALL RECORDS:",
+    r
   );
-
-  console.log("ALL RECORDS:",r);
 
   if(!r.success){
 
     results.innerHTML =
-      `<div class="message">${e(r.message)}</div>`;
+      `<div class="message">
+        ${e(r.message)}
+      </div>`;
 
     return;
   }
@@ -594,7 +702,10 @@ async function loadAllRecords(){
       ? r.records
       : [];
 
-  renderRecords(allRecords);
+  renderRecords(
+    allRecords
+  );
+
 }
 
 
@@ -602,7 +713,9 @@ async function loadAllRecords(){
    RENDER RECORDS
 ===================================================== */
 
-function renderRecords(records){
+function renderRecords(
+  records
+){
 
   if(!records.length){
 
@@ -649,8 +762,6 @@ function renderRecords(records){
 
           <th>NIN</th>
 
-          <th>Auto-Gen</th>
-
           <th>Action</th>
 
         </tr>
@@ -661,63 +772,107 @@ function renderRecords(records){
   `;
 
 
-  records.forEach((record,index)=>{
+  records.forEach(
+    (record,index)=>{
 
-    const status =
-      String(record.status || "").toUpperCase();
+      const status =
+        String(
+          record.status || ""
+        ).toUpperCase();
 
-    const statusClass =
-      status === "VERIFIED"
-        ? "verified"
-        : "pending";
 
-    html += `
+      const statusClass =
+        status === "VERIFIED"
+          ? "verified"
+          : "pending";
 
-      <tr>
 
-        <td>${index+1}</td>
+      html += `
 
-        <td>${e(record.childName)}</td>
+        <tr>
 
-        <td>${e(record.motherName)}</td>
+          <td>
+            ${index + 1}
+          </td>
 
-        <td>${e(record.motherPhone)}</td>
+          <td>
+            ${e(record.childName)}
+          </td>
 
-        <td>${e(record.dob)}</td>
+          <td>
+            ${e(record.motherName)}
+          </td>
 
-        <td>${e(record.sex)}</td>
+          <td>
+            ${e(record.motherPhone)}
+          </td>
 
-        <td>
+          <td>
+            ${e(record.dob)}
+          </td>
 
-          <span class="status ${statusClass}">
-            ${e(status || "PENDING")}
-          </span>
+          <td>
+            ${e(
+              record.sex ||
+              record.childSex
+            )}
+          </td>
 
-        </td>
+          <td>
 
-        <td>${e(record.applicationNumber)}</td>
+            <span
+              class="status ${statusClass}"
+            >
+              ${e(
+                status ||
+                "PENDING"
+              )}
+            </span>
 
-        <td>${e(record.nin)}</td>
+          </td>
 
-        <td>${e(record.autoGen)}</td>
+          <td>
+            ${e(
+              record.applicationNumber
+            )}
+          </td>
 
-        <td>
+          <td>
+            ${e(
+              record.nin
+            )}
+          </td>
 
-          <button
-            class="btn"
-            style="padding:7px 10px"
-            onclick='selectRecord(${JSON.stringify(record).replace(/'/g,"&#39;")})'
-          >
-            ${status === "VERIFIED" ? "VIEW" : "VERIFY"}
-          </button>
+          <td>
 
-        </td>
+            <button
+              class="btn"
+              style="padding:7px 10px"
+              onclick='selectRecord(
+                ${JSON.stringify(record)
+                  .replace(
+                    /'/g,
+                    "&#39;"
+                  )}
+              )'
+            >
 
-      </tr>
+              ${
+                status === "VERIFIED"
+                  ? "VIEW"
+                  : "VERIFY"
+              }
 
-    `;
+            </button>
 
-  });
+          </td>
+
+        </tr>
+
+      `;
+
+    }
+  );
 
 
   html += `
@@ -729,7 +884,10 @@ function renderRecords(records){
     </div>
   `;
 
-  results.innerHTML = html;
+
+  results.innerHTML =
+    html;
+
 }
 
 
@@ -742,6 +900,7 @@ async function searchRecord(){
   const q =
     search.value.trim();
 
+
   if(!q){
 
     loadAllRecords();
@@ -749,24 +908,38 @@ async function searchRecord(){
     return;
   }
 
-  results.innerHTML =
-    `<div class="empty">Searching...</div>`;
 
-  const r = await api(
-    "adminSearch",
-    {
-      token,
-      query:q
-    }
+  results.innerHTML =
+    `<div class="empty">
+      Searching...
+    </div>`;
+
+
+  const r =
+    await api(
+      "adminSearch",
+      {
+        token,
+
+        query:q
+      }
+    );
+
+
+  console.log(
+    "SEARCH:",
+    r
   );
 
-  console.log("SEARCH:",r);
 
   if(!r.success){
 
     results.innerHTML =
       `<div class="message">
-        ${e(r.message || "No record found.")}
+        ${e(
+          r.message ||
+          "No record found."
+        )}
       </div>`;
 
     editPanel.style.display =
@@ -775,20 +948,31 @@ async function searchRecord(){
     return;
   }
 
-  if(r.records && Array.isArray(r.records)){
 
-    renderRecords(r.records);
+  if(
+    r.records &&
+    Array.isArray(r.records)
+  ){
+
+    renderRecords(
+      r.records
+    );
 
   }else if(r.record){
 
-    renderRecords([r.record]);
+    renderRecords([
+      r.record
+    ]);
 
   }else{
 
     results.innerHTML =
-      `<div class="empty">No record found.</div>`;
+      `<div class="empty">
+        No record found.
+      </div>`;
 
   }
+
 }
 
 
@@ -796,42 +980,66 @@ async function searchRecord(){
    SELECT RECORD
 ===================================================== */
 
-function selectRecord(record){
+function selectRecord(
+  record
+){
 
-  selected = record;
+  selected =
+    record;
+
 
   recordInfo.innerHTML = `
-    <b>Child:</b> ${e(record.childName)}
+
+    <b>Child:</b>
+    ${e(record.childName)}
+
     &nbsp; | &nbsp;
 
-    <b>Mother:</b> ${e(record.motherName)}
+    <b>Mother:</b>
+    ${e(record.motherName)}
+
     &nbsp; | &nbsp;
 
-    <b>DOB:</b> ${e(record.dob)}
+    <b>DOB:</b>
+    ${e(record.dob)}
+
     <br><br>
 
-    <b>Phone:</b> ${e(record.motherPhone)}
+    <b>Phone:</b>
+    ${e(record.motherPhone)}
+
     &nbsp; | &nbsp;
 
-    <b>Status:</b> ${e(record.status)}
+    <b>Status:</b>
+    ${e(record.status)}
+
   `;
 
+
   applicationNumber.value =
-    record.applicationNumber || "";
+    record.applicationNumber ||
+    "";
+
 
   nin.value =
-    record.nin || "";
+    record.nin ||
+    "";
 
-  autoGen.value =
-    record.autoGen || "";
 
   editPanel.style.display =
     "block";
 
+
   window.scrollTo({
-    top:editPanel.offsetTop - 20,
-    behavior:"smooth"
+
+    top:
+      editPanel.offsetTop - 20,
+
+    behavior:
+      "smooth"
+
   });
+
 }
 
 
@@ -843,16 +1051,21 @@ async function verify(){
 
   if(!selected){
 
-    alert("Please select a record first.");
+    alert(
+      "Please select a record first."
+    );
 
     return;
   }
 
+
   const application =
     applicationNumber.value.trim();
 
+
   const ninValue =
     nin.value.trim();
+
 
   if(!application){
 
@@ -860,8 +1073,11 @@ async function verify(){
       "Application Number is required."
     );
 
+    applicationNumber.focus();
+
     return;
   }
+
 
   if(!ninValue){
 
@@ -869,23 +1085,28 @@ async function verify(){
       "NIN is required."
     );
 
+    nin.focus();
+
     return;
   }
 
 
-  const r = await api(
-    "verifyBirth",
-    {
-      token,
+  const r =
+    await api(
+      "verifyBirth",
+      {
+        token,
 
-      id:selected.id,
+        id:
+          selected.id,
 
-      applicationNumber:
-        application,
+        applicationNumber:
+          application,
 
-      nin:ninValue
-    }
-  );
+        nin:
+          ninValue
+      }
+    );
 
 
   if(r.success){
@@ -894,17 +1115,18 @@ async function verify(){
       "Certificate verified successfully."
     );
 
-    autoGen.value =
-      r.autoGen || "";
 
     await loadStats();
 
     await loadAllRecords();
 
+
     editPanel.style.display =
       "none";
 
-    selected = null;
+
+    selected =
+      null;
 
   }else{
 
@@ -914,6 +1136,7 @@ async function verify(){
     );
 
   }
+
 }
 
 
@@ -923,13 +1146,15 @@ async function verify(){
 
 function logout(){
 
-  token = "";
+  token =
+    "";
 
   sessionStorage.removeItem(
     "nasho_admin_token"
   );
 
   location.reload();
+
 }
 
 
@@ -939,17 +1164,31 @@ function logout(){
 
 function e(s){
 
-  return String(s ?? "")
-    .replace(
-      /[&<>"']/g,
-      m => ({
-        "&":"&amp;",
-        "<":"&lt;",
-        ">":"&gt;",
-        '"':"&quot;",
-        "'":"&#39;"
-      }[m])
-    );
+  return String(
+    s ?? ""
+  ).replace(
+    /[&<>"']/g,
+
+    m => ({
+
+      "&":
+        "&amp;",
+
+      "<":
+        "&lt;",
+
+      ">":
+        "&gt;",
+
+      '"':
+        "&quot;",
+
+      "'":
+        "&#39;"
+
+    }[m])
+
+  );
 
 }
 
@@ -960,6 +1199,7 @@ function e(s){
 
 window.addEventListener(
   "DOMContentLoaded",
+
   async()=>{
 
     const saved =
@@ -967,17 +1207,22 @@ window.addEventListener(
         "nasho_admin_token"
       );
 
+
     if(saved){
 
-      token = saved;
+      token =
+        saved;
+
 
       login.classList.add(
         "hidden"
       );
 
+
       app.classList.remove(
         "hidden"
       );
+
 
       await loadStats();
 
